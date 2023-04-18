@@ -4,7 +4,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
   <meta charset="UTF-8">
-  <title>Master Page</title>
+  <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE ">BEGOINGTO</title>
   <th:block th:replace="~{fragments/styles}"></th:block>
 </head>
 <body>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+  <meta charset="UTF-8">
+  <title>Master Page</title>
+  <th:block th:replace="~{fragments/styles}"></th:block>
+</head>
+<body>
+
+<!--<th:block th:replace=""></th:block>-->
+
+<div th:replace="~{fragments/navbar}"></div>
+
+<main class="container" layout:fragment="main-content">
+  <!-- individual web page content  -->
+</main>
+
+<div th:replace="~{fragments/footer}"></div>
+
+<th:block th:replace="~{fragments/scripts}"></th:block>
+</body>
+</html>

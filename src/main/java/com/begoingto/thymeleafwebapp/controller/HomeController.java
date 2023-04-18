@@ -7,12 +7,12 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class HomeController {
 
-    @GetMapping("/")
+    @GetMapping("/testing")
     String homePage(){
         return "index";
     }
 
-    @GetMapping("/article")
+    @GetMapping("/testing/article")
     String articlePage(){
         return "article";
     }

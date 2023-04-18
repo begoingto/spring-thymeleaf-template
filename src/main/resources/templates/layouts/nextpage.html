@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <title layout:title-pattern="$LAYOUT_TITLE - $CONTENT_TITLE">NextPage</title>
+    <!-- favicon -->
+    <link rel=icon th:href="@{/resources/img/favicon.png}" sizes="20x20" type="image/png">
+    <th:block th:replace="~{fragments2/styles}"></th:block>
+</head>
+<body>
+
+<!--<th:block th:replace=""></th:block>-->
+
+<div th:replace="~{fragments2/header}"></div>
+
+<main layout:fragment="main-content">
+    <!-- individual web page content  -->
+</main>
+
+<div th:replace="~{fragments2/footer}"></div>
+
+<th:block th:replace="~{fragments2/scripts}"></th:block>
+</body>
+</html>

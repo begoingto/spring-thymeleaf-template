@@ -20,9 +20,18 @@
                     <input type="text" class="form-control" id="title" th:field="*{title}" aria-describedby="emailHelp">
                     <div  class="form-text text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">We'll never share your .</div>
                 </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" id="description" rows="3"></textarea>
+                </div>
+
                 <div class="mb-3">
                     <label for="author" class="form-label">Author</label>
-                    <input type="text" class="form-control" id="author" th:field="*{author}">
+                    <!--                    <input type="text" class="form-control" id="author" th:field="*{author}">-->
+                    <select class="form-select" id="author" aria-label="Default select example">
+                        <option th:each="author : ${authors}" th:value="${author}" th:text="${author}">One</option>
+                    </select>
                     <div  class="form-text text-danger" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">We'll never share your .</div>
                 </div>
             </div>
@@ -31,10 +40,13 @@
                     <label for="thumbnail" class="form-label">Upload thumbnail</label>
                     <input class="form-control" type="file" id="thumbnail" name="thumbnailFile">
                 </div>
-                <label for="thumbnail" class="d-flex justify-content-center">
-                    <img th:src="@{/resources/img/default/no_image.jpg}" alt="picture"
-                         class="bd-placeholder-img card-img-top w-50 border" id="placeholder">
-                </label>
+                <div class="d-flex justify-content-center">
+                    <label for="thumbnail" class="w-50">
+                        <img th:src="@{/resources/img/default/no_image.jpg}" alt="picture"
+                             class="bd-placeholder-img card-img-top w-100 border" id="placeholder">
+                    </label>
+                </div>
+
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

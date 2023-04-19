@@ -1,6 +1,7 @@
 package com.begoingto.thymeleafwebapp.services.impl;
 
 import com.begoingto.thymeleafwebapp.models.Article;
+import com.begoingto.thymeleafwebapp.models.Author;
 import com.begoingto.thymeleafwebapp.models.FileUpload;
 import com.begoingto.thymeleafwebapp.repositories.StaticRepository;
 import com.begoingto.thymeleafwebapp.services.ArticleService;
@@ -12,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -21,6 +23,11 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public List<Article> findAll() {
         return staticRepository.getArticles();
+    }
+
+    @Override
+    public List<String> authUsername() {
+        return staticRepository.getAuthors().stream().map(Author::getUsername).collect(Collectors.toList());
     }
 
     @Override

@@ -10,6 +10,7 @@ public interface ArticleService {
     // POJO
     List<Article> findAll();
 
+    List<String> authUsername();
     Article singleArticle(String uuid);
 
     boolean save(Article article, MultipartFile file);

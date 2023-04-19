@@ -1,6 +1,7 @@
 package com.begoingto.thymeleafwebapp.controller;
 
 import com.begoingto.thymeleafwebapp.models.Article;
+import com.begoingto.thymeleafwebapp.models.Author;
 import com.begoingto.thymeleafwebapp.services.ArticleService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +36,7 @@ public class ArticleController {
     @GetMapping("/new")
     String newArticle(Article article,Model model){
         model.addAttribute("article",article);
+        model.addAttribute("authors",articleService.authUsername());
         return "article-new";
     }
 

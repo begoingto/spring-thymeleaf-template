@@ -1,0 +1,28 @@
+<section>
+    <a th:fragment="readonly(uuid, title, thumbnail,author)"
+       th:href="@{/article/{uuid}(uuid=${uuid})}"
+       class="card shadow-sm text-decoration-none border-0">
+        <img th:src="@{${thumbnail}}" alt="picture" class="bd-placeholder-img card-img-top">
+        <div class="card-body">
+            <p class="card-text" th:text="${title}"></p>
+            <div class="d-flex justify-content-between align-items-center">
+                <small class="text-body-secondary" th:text="${author}">author</small>
+            </div>
+        </div>
+    </a>
+
+    <div class="card shadow-sm border-0" th:fragment="action(uuid, title, thumbnail,author)">
+        <img th:src="@{${thumbnail}}" alt="picture" class="bd-placeholder-img card-img-top">
+        <div class="card-body">
+            <p class="card-text" th:text="${title}"></p>
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-success"><i class="bi bi-eye"></i> View</button>
+                    <button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i> Edit</button>
+                    <button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i> Delete</button>
+                </div>
+                <small class="text-body-secondary" th:text="${author}">author</small>
+            </div>
+        </div>
+    </div>
+</section>

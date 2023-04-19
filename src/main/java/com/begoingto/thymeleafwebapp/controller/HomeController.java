@@ -1,19 +1,25 @@
 package com.begoingto.thymeleafwebapp.controller;
 
+import com.begoingto.thymeleafwebapp.models.Article;
+import com.begoingto.thymeleafwebapp.services.ArticleService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.bind.annotation.PathVariable;
+
+import java.util.List;
 
 @Controller
+@RequiredArgsConstructor
 public class HomeController {
 
-    @GetMapping("/testing")
-    String homePage(){
-        return "index";
-    }
+    private final ArticleService articleService;
 
-    @GetMapping("/testing/article")
-    String articlePage(){
-        return "article";
+    @GetMapping("/")
+    String homePage(Model model){
+        List<Article> articles = articleService.findAll();
+        model.addAttribute("articles", articles);
+        return "index";
     }
 }

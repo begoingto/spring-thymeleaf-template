@@ -5,6 +5,7 @@
 <head>
   <meta charset="UTF-8">
   <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE ">BEGOINGTO</title>
+  <link rel="icon" href="https://icons.getbootstrap.com/assets/img/favicons/favicon.ico" />
   <th:block th:replace="~{fragments/styles}"></th:block>
 </head>
 <body>
@@ -19,6 +20,9 @@
 
 <div th:replace="~{fragments/footer}"></div>
 
+<th:block layout:fragment="subscript">
+  <!-- individual web page script  -->
+</th:block>
 <th:block th:replace="~{fragments/scripts}"></th:block>
 </body>
 </html>

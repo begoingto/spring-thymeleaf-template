@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/master}"
+      th:object="${article}"
+>
+<head>
+  <title th:text="*{title}">Single Article </title>
+</head>
+<body>
+<main class="px-3 container" layout:fragment="main-content">
+    <br>
+    <div style="max-width: 700px;" class="mx-auto">
+        <div class="card shadow-sm border-0">
+            <img th:src="@{*{thumbnail}}" alt="picture" class="bd-placeholder-img card-img-top">
+            <div class="card-body">
+                <h1 th:text="*{title}">Single Article</h1>
+            </div>
+        </div>
+
+    </div>
+</main>
+</body>
+</html>

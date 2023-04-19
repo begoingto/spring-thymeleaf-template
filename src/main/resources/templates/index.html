@@ -9,11 +9,23 @@
 </head>
 <body>
 <main class="px-3 container"  layout:fragment="main-content">
-    <h1>Cover your page 2023.</h1>
-    <p class="lead">Cover is a one-page template for building simple and beautiful home pages. Download, edit the text, and add your own fullscreen background photo to make it your own.</p>
-    <p class="lead">
-        <a href="#" class="btn btn-lg btn-light fw-bold border-white bg-white">Learn more</a>
-    </p>
+    <!--  Welcome to start  -->
+    <div th:replace="~{fragments/welcome}"></div>
+    <!--  End welcome  -->
+
+    <!--  Card  -->
+    <div class="album py-5">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+
+            <div class="col" th:each="article : ${articles}" th:object="${article}">
+                <div
+                   th:replace="~{fragments/card::readonly(*{uuid},*{title},*{thumbnail},*{author})}"
+                ></div>
+            </div>
+
+        </div>
+    </div>
+    <!--  End card  -->
 </main>
 </body>
 </html>

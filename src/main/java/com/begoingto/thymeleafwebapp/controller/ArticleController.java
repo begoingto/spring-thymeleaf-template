@@ -21,7 +21,6 @@ public class ArticleController {
     @GetMapping
     String articlePage(Model model){
         List<Article> articles = articleService.findAll();
-        System.out.println(articles);
         model.addAttribute("articles", articles);
         return "article";
     }
@@ -40,7 +39,10 @@ public class ArticleController {
     }
 
     @PostMapping(value = "/new")
-    String doSaveArticle(@ModelAttribute @Valid Article article, BindingResult result, @RequestParam("thumbnail") MultipartFile file, Model model){
+    String doSaveArticle(@ModelAttribute @Valid Article article,
+                         BindingResult result,
+                         @RequestParam("thumbnailFile") MultipartFile file,
+                         Model model){
         if (result.hasErrors()){
             model.addAttribute("article",article);
             return "article-new";

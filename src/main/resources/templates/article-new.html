@@ -29,14 +29,12 @@
             <div class="col">
                 <div class="mb-3">
                     <label for="thumbnail" class="form-label">Upload thumbnail</label>
-                    <input class="form-control" type="file" id="thumbnail" th:field="*{thumbnail}">
+                    <input class="form-control" type="file" id="thumbnail" name="thumbnailFile">
                 </div>
-                <div class="d-flex justify-content-center">
-                    <label for="thumbnail">
-                        <img th:src="@{/resources/img/default/no_image.jpg}" alt="picture"
-                             class="bd-placeholder-img card-img-top w-50 border" id="placeholder">
-                    </label>
-                </div>
+                <label for="thumbnail" class="d-flex justify-content-center">
+                    <img th:src="@{/resources/img/default/no_image.jpg}" alt="picture"
+                         class="bd-placeholder-img card-img-top w-50 border" id="placeholder">
+                </label>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>

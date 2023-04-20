@@ -1,33 +1,100 @@
 <section>
-    <a th:fragment="readonly(uuid, title, thumbnail,author)"
+    <a th:fragment="readonly(uuid, title, thumbnail,author,description)"
        th:href="@{/article/{uuid}(uuid=${uuid})}"
-       class="card shadow-sm text-decoration-none border-0">
+       class="card h-100 shadow-sm text-decoration-none border-0">
         <img th:src="@{${thumbnail}}" alt="picture" class="bd-placeholder-img card-img-top">
-        <div class="card-body">
-            <p class="card-text" th:text="${title}"></p>
-            <div class="d-flex justify-content-between align-items-center">
-                <small class="text-body-secondary" th:text="${author}">author</small>
+        <div class="card-body position-relative">
+            <div class="position-absolute start-0 translate-middle-y">
+                <div class="d-flex">
+                    <div
+                            class="text-bg-dark rounded-pill"
+                            style="width: 50px;height: 50px;"
+                    >
+                        <img th:src="@{${author.avatar}}" alt="picture" class="w-100 h-100 object-fit-cover rounded-pill border-3">
+                    </div>
+                    <div class="align-self-end mb-0 ms-2">
+                        <div>
+                            <small th:text="${author.name}"></small>
+                        </div>
+                        <div>
+                            <small class="text-primary" th:text="${#strings.prepend(author.username,'@')}"></small>
+                        </div>
+                    </div>
+                </div>
             </div>
+            <br>
+            <h5 class="card-title" th:text="${title}">Card title</h5>
+            <div th:if="${#strings.length(description)>60}">
+                <p class="card-text" th:text="${#strings.substring(description,0,60).concat('...')}"></p>
+            </div>
+            <div th:if="${#strings.length(description)<60}">
+                <p class="card-text" th:text="${description}"></p>
+            </div>
+        </div>
+        <div class="card-footer bg-transparent border-0 d-flex justify-content-between align-items-center">
+            <small class="text-body-secondary" th:text="${author.username}">author</small>
         </div>
     </a>
 
-    <div class="card shadow-sm border-0 h-100" th:fragment="action(uuid, title, thumbnail,author)">
+    <div class="card shadow-sm border-0 h-100" th:fragment="action(uuid, title, thumbnail,author,description)">
         <img th:src="@{${thumbnail}}" alt="picture" class="bd-placeholder-img card-img-top">
-        <div class="card-body">
-            <p class="card-text" th:text="${title}"></p>
+        <div class="card-body position-relative">
+            <div class="position-absolute start-0 translate-middle-y">
+                <div class="d-flex">
+                    <div
+                            class="text-bg-dark rounded-pill"
+                            style="width: 50px;height: 50px;"
+                    >
+                        <img th:src="@{${author.avatar}}" alt="picture" class="w-100 h-100 object-fit-cover rounded-pill border-3">
+                    </div>
+                    <div class="align-self-end mb-0 ms-2">
+                        <div>
+                            <small th:text="${author.name}"></small>
+                        </div>
+                        <div>
+                            <small th:text="${#strings.prepend(author.username,'@')}"></small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <h5 class="card-title" th:text="${title}">Card title</h5>
+            <div th:if="${#strings.length(description)>60}">
+                <p class="card-text" th:text="${#strings.substring(description,0,60).concat('...')}"></p>
+            </div>
+            <div th:if="${#strings.length(description)<60}">
+                <p class="card-text" th:text="${description}"></p>
+            </div>
         </div>
         <div class="card-footer border-0 bg-transparent d-flex justify-content-between align-items-center">
             <div class="btn-group">
                 <button type="button" class="btn btn-sm btn-outline-success"><i class="bi bi-eye"></i> View</button>
-                <button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i> Edit</button>
+                <button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i> Edit
+                </button>
                 <button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i> Delete</button>
             </div>
             <div th:if="${#strings.length(author)>8}">
-                <small class="text-body-secondary" th:text="${#strings.substring(author,0,8).concat('...')}">author</small>
+                <small class="text-body-secondary"
+                       th:text="${#strings.substring(author,0,8).concat('...')}">author</small>
             </div>
             <div th:if="${#strings.length(author)<8}">
                 <small class="text-body-secondary" th:text="${author}">author</small>
             </div>
+        </div>
+    </div>
+
+    <div class="card shadow-sm border-0 h-100" th:fragment="author(user)">
+        <img th:src="${user.avatar}" class="card-img-top" th:alt="${user.username}">
+        <div class="card-body">
+            <h5 class="card-title" th:text="${user.name}">Card title</h5>
+            <p class="mb-1">Gender: <span th:text="${user.gender}"></span></p>
+            <address class="card-text mb-1" >
+                Address: <span th:text="${user.address}"></span>
+            </address>
+            <p class="mb-1">Email: <span th:text="${user.email}"></span></p>
+        </div>
+        <div class="card-footer">
+            <a href="#" class="btn btn-primary btn-sm">View Profile</a>
         </div>
     </div>
 </section>

@@ -22,4 +22,6 @@ public class Article {
     //@NotNull(message = "The author field is required.")
     private Author author;
 
+    private String description;
+
 }

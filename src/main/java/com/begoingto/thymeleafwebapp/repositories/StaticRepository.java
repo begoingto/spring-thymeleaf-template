@@ -27,8 +27,8 @@ public class StaticRepository {
     @PostConstruct
     void init() {
         Author author = new Author(
-                1, "Terry Medhurst",
-                "Terry_Medhurst".toLowerCase(), "male",
+                1, "Begoingto Me",
+                "begoingto".toLowerCase(), "male",
                 "atuny0@sohu.com",
                 "1745 T Street Southeast",
                 "https://robohash.org/hicveldicta.png",
@@ -36,19 +36,12 @@ public class StaticRepository {
         );
         articles = new ArrayList<>() {{
             for (int i = 0; i < 20; i++) {
-                add(new Article(UUID.randomUUID(), faker.book().title(), "/resources/img/default/article"+ (i%2==0?"2":"") +".png", author));
+                add(new Article(UUID.randomUUID(), faker.book().title(), "/resources/img/default/article"+ (i%2==0?"2":"") +".png", author,faker.lorem().sentence(15)));
             }
         }};
 
         authors = new ArrayList<>(){{
-            add(new Author(
-                  1, "Terry Medhurst",
-                    "Terry_Medhurst".toLowerCase(), "male",
-                    "atuny0@sohu.com",
-                    "1745 T Street Southeast",
-                    "https://robohash.org/hicveldicta.png",
-                    "/resources/img/default/article.png"
-            ));
+            add(author);
             add(new Author(
                     2, "Sheldon Quigley",
                     "Sheldon".toLowerCase(), "male",

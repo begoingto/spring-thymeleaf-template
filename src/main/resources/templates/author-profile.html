@@ -18,7 +18,7 @@
                 object-position: center;
             }
             .container.card{
-                max-width: 800px;
+                max-width: 900px;
             }
         </style>
     </th:block>
@@ -30,9 +30,9 @@
     </div>
     <div class="container card">
         <div class="position-absolute start-0 translate-middle-y">
-            <div class="d-flex">
+            <div class="d-flex text-bg-dark bg-opacity-75" style="border-radius: 75px;">
                 <div
-                        class="bg-primary rounded-pill"
+                        class="bg-info rounded-pill"
                         style="width: 120px;height: 120px;"
                 >
                     <img th:src="@{${author.avatar}}" alt="picture" class="w-100 h-100 object-fit-cover rounded-pill border-3">
@@ -42,8 +42,13 @@
                         <h3 class="text-uppercase" th:text="${author.name}"></h3>
                     </div>
                     <div>
-                        <h4 class="text-primary" th:text="${#strings.prepend(author.username,'@')}"></h4>
+                        <h4 class="text-info" th:text="${#strings.prepend(author.username,'@')}"></h4>
                     </div>
+                </div>
+                <div
+                        class="bg-transparent rounded-pill bg-opacity-75"
+                        style="width: 50px;height: 120px;"
+                >
                 </div>
             </div>
         </div>
@@ -51,7 +56,7 @@
         <br>
         <br>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-6">
                 <div class="card mb-2 bg-secondary bg-opacity-25 border-0">
                     <div class="card-body">
                         <p class="mb-1">Gender: <span class="text-capitalize" th:text="${author.gender}"></span></p>
@@ -62,7 +67,24 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="mb-4 d-flex justify-content-center border-bottom border-1 pb-3">
+            <div class="m-0 text-uppercase position-relative">
+                <span class="fs-4 fw-bolder">Your Articles</span>
+                <small th:text="${author.articles.size()}" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                </small>
             </div>
+        </div>
+        <div th:if="${!author.articles.isEmpty()}" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-3">
+            <div class="col" th:each="article : ${author.articles}" th:object="${article}">
+                <div
+                        th:replace="~{fragments/card::readonly(*{uuid},*{title},*{thumbnail},*{author},*{description},*{categories})}"
+                ></div>
+            </div>
+        </div>
+
+        <div th:if="${author.articles.isEmpty()}">
+            <p class="text-center text-danger opacity-75">Empty article</p>
         </div>
     </div>
 </main>

@@ -1,4 +1,5 @@
 <section>
+<!--    Card Readonly ~ Start -->
     <a th:fragment="readonly(uuid, title, thumbnail,author,description,categories)"
        th:href="@{/article/{uuid}(uuid=${uuid})}"
        class="card h-100 shadow-sm text-decoration-none border-0">
@@ -25,7 +26,12 @@
             <br>
             <h5 class="card-title" th:text="${title}">Card title</h5>
             <div>
-                <span class="badge rounded-pill text-bg-warning" th:each="category : ${categories}" th:object="${category}" th:text="${category.name}">Warning</span>
+                <span class="badge rounded-pill text-bg-warning bg-cat"
+                      th:each="category : ${categories}"
+                      th:object="${category}"
+                      th:text="${category.name}"
+                >
+                </span>
             </div>
             <div th:if="${#strings.length(description)>60}">
                 <p class="card-text" th:text="${#strings.substring(description,0,60).concat('...')}"></p>
@@ -38,8 +44,10 @@
             <small class="text-body-secondary" th:text="${author.username}">author</small>
         </div>
     </a>
+    <!--    Card Readonly ~ End -->
 
-    <div class="card shadow-sm border-0 h-100" th:fragment="action(uuid, title, thumbnail,author,description)">
+    <!--    Card Action ~ Start -->
+    <div class="card shadow-sm border-0 h-100" th:fragment="action(uuid, title, thumbnail,author,description,categories)">
         <img th:src="@{${thumbnail}}" alt="picture" class="bd-placeholder-img card-img-top">
         <div class="card-body position-relative">
             <div class="position-absolute start-0 translate-middle-y">
@@ -68,10 +76,13 @@
             <div th:if="${#strings.length(description)<60}">
                 <p class="card-text" th:text="${description}"></p>
             </div>
+            <div>
+                <a href="#" class="badge rounded-pill text-bg-warning text-decoration-none" th:each="category : ${categories}" th:object="${category}" th:text="${category.name}">Warning</a>
+            </div>
         </div>
         <div class="card-footer border-0 bg-transparent d-flex justify-content-between align-items-center">
             <div class="btn-group">
-                <button type="button" class="btn btn-sm btn-outline-success"><i class="bi bi-eye"></i> View</button>
+                <a th:href="@{/article/{uuid}(uuid=${uuid})}" class="btn btn-sm btn-outline-success"><i class="bi bi-eye"></i> View</a>
                 <button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i> Edit
                 </button>
                 <button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i> Delete</button>
@@ -85,7 +96,9 @@
             </div>
         </div>
     </div>
+    <!--    Card Action ~ End -->
 
+    <!--    Card Author ~ Start -->
     <div class="card shadow-sm border-0 h-100" th:fragment="author(user)">
         <img th:src="${user.avatar}" class="card-img-top" th:alt="${user.username}">
         <div class="card-body">
@@ -101,4 +114,5 @@
             <a th:href="@{/authors/{id}(id=${user.id})}" class="btn btn-primary btn-sm"><i class="bi bi-eye"></i> View Profile</a>
         </div>
     </div>
+    <!--    Card Author ~ End -->
 </section>

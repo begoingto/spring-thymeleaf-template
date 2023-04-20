@@ -46,9 +46,15 @@ public class ArticleServiceImpl implements ArticleService {
             article.setUuid(UUID.randomUUID());
             article.setThumbnail("/files/" + fileUpload.fileName());
             staticRepository.getArticles().add(0,article);
-            staticRepository.getArticles().forEach(System.out::println);
         }
         return false;
+    }
+
+    @Override
+    public List<Article> getArticleByAuthor(Author author) {
+        return staticRepository.getArticles().stream()
+                .filter(article -> article.getAuthor().equals(author))
+                .toList();
     }
 
 }

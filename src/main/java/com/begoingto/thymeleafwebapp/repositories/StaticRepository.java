@@ -70,7 +70,7 @@ public class StaticRepository {
 
         categories = new ArrayList<>(){{
             for (int i = 1; i < 11; i++){
-                add(new Category(i,faker.pokemon().name()));
+                add(new Category(i,faker.pokemon().name(),faker.color().hex()));
             }
         }};
         Random random = new Random();
@@ -82,8 +82,8 @@ public class StaticRepository {
                                 UUID.randomUUID(),
                                 faker.book().title(),
                                 "/resources/img/default/article"+ (i%2==0?"2":"") +".png",
-                                authors.get(random.nextInt(authors.size()-1)),
-                                faker.lorem().sentence(15),
+                                authors.get(random.nextInt(authors.size())),
+                                faker.lorem().paragraphs(10).toString(),
                                 categories.subList(0,2)
                         )
                 );

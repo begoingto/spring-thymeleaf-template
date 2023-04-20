@@ -19,7 +19,7 @@
 
             <div class="col" th:each="article : ${articles}" th:object="${article}">
                 <div
-                   th:replace="~{fragments/card::readonly(*{uuid},*{title},*{thumbnail},*{author})}"
+                   th:replace="~{fragments/card::readonly(*{uuid},*{title},*{thumbnail},*{author.username})}"
                 ></div>
             </div>
 

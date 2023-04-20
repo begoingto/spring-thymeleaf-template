@@ -26,8 +26,8 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<String> authUsername() {
-        return staticRepository.getAuthors().stream().map(Author::getUsername).collect(Collectors.toList());
+    public List<Author> auths() {
+        return staticRepository.getAuthors();
     }
 
     @Override
@@ -46,6 +46,7 @@ public class ArticleServiceImpl implements ArticleService {
             article.setUuid(UUID.randomUUID());
             article.setThumbnail("/files/" + fileUpload.fileName());
             staticRepository.getArticles().add(0,article);
+            staticRepository.getArticles().forEach(System.out::println);
         }
         return false;
     }

@@ -36,16 +36,24 @@ public class ArticleController {
     @GetMapping("/new")
     String newArticle(Article article,Model model){
         model.addAttribute("article",article);
-        model.addAttribute("authors",articleService.authUsername());
+        model.addAttribute("users",articleService.auths());
         return "article-new";
     }
 
     @PostMapping(value = "/new")
     String doSaveArticle(@ModelAttribute @Valid Article article,
                          BindingResult result,
+                         @RequestParam("author_id") Integer author_id,
                          @RequestParam("thumbnailFile") MultipartFile file,
                          Model model){
+
+        Author author =  articleService.auths().stream()
+                .filter(a -> a.getId().equals(author_id))
+                .findFirst()
+                .orElse(null);
+        article.setAuthor(author);
         if (result.hasErrors()){
+            System.out.println(result.getFieldErrors());
             model.addAttribute("article",article);
             return "article-new";
         }

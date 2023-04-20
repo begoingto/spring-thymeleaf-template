@@ -29,10 +29,10 @@
                 <div class="mb-3">
                     <label for="author" class="form-label">Author</label>
                     <!--                    <input type="text" class="form-control" id="author" th:field="*{author}">-->
-                    <select class="form-select" id="author" aria-label="Default select example">
-                        <option th:each="author : ${authors}" th:value="${author}" th:text="${author}">One</option>
+                    <select class="form-select" id="author" name="author_id" aria-label="Default select example">
+                        <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}">username</option>
                     </select>
-                    <div  class="form-text text-danger" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">We'll never share your .</div>
+<!--                    <div  class="form-text text-danger" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">We'll never share your .</div>-->
                 </div>
             </div>
             <div class="col">

@@ -27,8 +27,8 @@
                 </div>
 
                 <div class="mb-3">
-                    <label for="description" class="form-label">Categories</label>
-                    <select class="form-select" multiple aria-label="multiple select example">
+                    <label for="categories" class="form-label">Categories</label>
+                    <select class="form-select" id="categories" name="category_ids" multiple aria-label="multiple select categories">
                         <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}">username</option>
                     </select>
                 </div>

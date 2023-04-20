@@ -2,6 +2,7 @@ package com.begoingto.thymeleafwebapp.repositories;
 
 import com.begoingto.thymeleafwebapp.models.Article;
 import com.begoingto.thymeleafwebapp.models.Author;
+import com.begoingto.thymeleafwebapp.models.Category;
 import com.github.javafaker.Faker;
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 
 @Repository
@@ -17,6 +19,7 @@ public class StaticRepository {
 
     private List<Article> articles;
     private List<Author> authors;
+    private List<Category> categories;
     private Faker faker;
 
     @Autowired
@@ -34,11 +37,6 @@ public class StaticRepository {
                 "https://robohash.org/hicveldicta.png",
                 "/resources/img/default/article.png"
         );
-        articles = new ArrayList<>() {{
-            for (int i = 0; i < 20; i++) {
-                add(new Article(UUID.randomUUID(), faker.book().title(), "/resources/img/default/article"+ (i%2==0?"2":"") +".png", author,faker.lorem().sentence(15)));
-            }
-        }};
 
         authors = new ArrayList<>(){{
             add(author);
@@ -69,5 +67,28 @@ public class StaticRepository {
                     "https://th.bing.com/th/id/R.e1c660810d5ebf2f6ff3fd7a77b6d0f0?rik=Y7SdLsUVGGzwSA&pid=ImgRaw&r=0"
             ));
         }};
+
+        categories = new ArrayList<>(){{
+            for (int i = 1; i < 11; i++){
+                add(new Category(i,faker.pokemon().name()));
+            }
+        }};
+        Random random = new Random();
+        articles = new ArrayList<>() {{
+
+            for (int i = 0; i < 15; i++) {
+                add(
+                        new Article(
+                                UUID.randomUUID(),
+                                faker.book().title(),
+                                "/resources/img/default/article"+ (i%2==0?"2":"") +".png",
+                                authors.get(random.nextInt(authors.size()-1)),
+                                faker.lorem().sentence(15),
+                                categories.subList(0,2)
+                        )
+                );
+            }
+        }};
+
     }
 }

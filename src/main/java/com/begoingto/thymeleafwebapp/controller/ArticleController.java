@@ -3,6 +3,7 @@ package com.begoingto.thymeleafwebapp.controller;
 import com.begoingto.thymeleafwebapp.models.Article;
 import com.begoingto.thymeleafwebapp.models.Author;
 import com.begoingto.thymeleafwebapp.services.ArticleService;
+import com.begoingto.thymeleafwebapp.services.CategoryService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ import java.util.List;
 @RequestMapping("/article")
 public class ArticleController {
     private final ArticleService articleService;
+    private final CategoryService categoryService;
 
     @GetMapping
     String articlePage(Model model){
@@ -37,6 +39,7 @@ public class ArticleController {
     String newArticle(Article article,Model model){
         model.addAttribute("article",article);
         model.addAttribute("users",articleService.auths());
+        model.addAttribute("categories",categoryService.getCategories());
         return "article-new";
     }
 
@@ -57,7 +60,7 @@ public class ArticleController {
             model.addAttribute("article",article);
             return "article-new";
         }
-        articleService.save(article,file);
+//        articleService.save(article,file);
         return "redirect:/article/new";
     }
 }

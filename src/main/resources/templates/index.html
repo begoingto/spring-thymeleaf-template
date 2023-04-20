@@ -15,14 +15,34 @@
 
     <!--  Card  -->
     <div class="album py-5">
-        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="mb-4 border-bottom border-1 pb-3">
+                    <h4>Total articles: <span th:text="${articles.size()}"></span></h4>
+                </div>
+                <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3">
 
-            <div class="col" th:each="article : ${articles}" th:object="${article}">
-                <div
-                   th:replace="~{fragments/card::readonly(*{uuid},*{title},*{thumbnail},*{author},*{description})}"
-                ></div>
+                    <div class="col" th:each="article : ${articles}" th:object="${article}">
+                        <div
+                                th:replace="~{fragments/card::readonly(*{uuid},*{title},*{thumbnail},*{author},*{description},*{categories})}"
+                        ></div>
+                    </div>
+
+                </div>
             </div>
-
+            <div class="col-md-4">
+                <div class="card shadow-sm border-0">
+                    <img src="https://image.slidesharecdn.com/premhenna-140818000904-phpapp01/95/prem-henna-pvt-ltd-indore-herbal-mehandi-7-638.jpg?cb=1408321492" class="w-100" alt="banner">
+                    <h3 class="card-header">
+                        Total Category: <span th:text="${categories.size()}"></span>
+                    </h3>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <a href="#" class="list-group-item" th:each="category : ${categories}" th:text="${category.name}">An item</a>
+                        </ul>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!--  End card  -->

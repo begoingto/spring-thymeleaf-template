@@ -1,5 +1,5 @@
 <section>
-    <a th:fragment="readonly(uuid, title, thumbnail,author,description)"
+    <a th:fragment="readonly(uuid, title, thumbnail,author,description,categories)"
        th:href="@{/article/{uuid}(uuid=${uuid})}"
        class="card h-100 shadow-sm text-decoration-none border-0">
         <img th:src="@{${thumbnail}}" alt="picture" class="bd-placeholder-img card-img-top">
@@ -24,6 +24,9 @@
             </div>
             <br>
             <h5 class="card-title" th:text="${title}">Card title</h5>
+            <div>
+                <span class="badge rounded-pill text-bg-warning" th:each="category : ${categories}" th:object="${category}" th:text="${category.name}">Warning</span>
+            </div>
             <div th:if="${#strings.length(description)>60}">
                 <p class="card-text" th:text="${#strings.substring(description,0,60).concat('...')}"></p>
             </div>

@@ -17,19 +17,26 @@
             <div class="col">
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="title" th:field="*{title}" aria-describedby="emailHelp">
+                    <input type="text" class="form-control" id="title" th:field="*{title}" placeholder="Enter post title...">
                     <div  class="form-text text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">We'll never share your .</div>
                 </div>
 
                 <div class="mb-3">
                     <label for="description" class="form-label">Description</label>
-                    <textarea class="form-control" id="description" th:field="*{description}" rows="3"></textarea>
+                    <textarea class="form-control" id="description"  placeholder="Enter description..." th:field="*{description}" rows="3"></textarea>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Categories</label>
+                    <select class="form-select" multiple aria-label="multiple select example">
+                        <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}">username</option>
+                    </select>
                 </div>
 
                 <div class="mb-3">
                     <label for="author" class="form-label">Author</label>
                     <!--                    <input type="text" class="form-control" id="author" th:field="*{author}">-->
-                    <select class="form-select" id="author" name="author_id" aria-label="Default select example">
+                    <select class="form-select" id="author" name="author_id">
                         <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}">username</option>
                     </select>
 <!--                    <div  class="form-text text-danger" th:if="${#fields.hasErrors('author')}" th:errors="*{author}">We'll never share your .</div>-->

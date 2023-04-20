@@ -62,7 +62,7 @@ public class ArticleController {
         // Filter Category in
         System.out.println(category_ids);
         List<Category> categories = categoryService.getCategories()
-                        .stream().filter(category -> category_ids.contains(category.id()))
+                        .stream().filter(category -> category_ids.contains(category.getId()))
                         .toList();
         //set author
         article.setAuthor(author);

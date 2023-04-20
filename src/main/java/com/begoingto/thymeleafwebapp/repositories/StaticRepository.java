@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Repository
 @Getter
@@ -77,6 +78,7 @@ public class StaticRepository {
         articles = new ArrayList<>() {{
 
             for (int i = 0; i < 15; i++) {
+
                 add(
                         new Article(
                                 UUID.randomUUID(),
@@ -84,7 +86,8 @@ public class StaticRepository {
                                 "/resources/img/default/article"+ (i%2==0?"2":"") +".png",
                                 authors.get(random.nextInt(authors.size())),
                                 faker.lorem().paragraphs(10).toString(),
-                                categories.subList(0,2)
+                                categories.stream().filter(cat->cat.getId().equals(random.nextInt(categories.size())))
+                                        .collect(Collectors.toList())
                         )
                 );
             }

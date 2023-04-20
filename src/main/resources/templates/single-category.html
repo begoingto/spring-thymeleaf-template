@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/master}"
+      th:object="${catArt}"
+>
+<head>
+    <title th:text="${catArt.category().name}">Article Page</title>
+    <th:block layout:fragment="substyles">
+        <style>
+            .cover{
+                width: 100%;
+                height: 350px;
+            }
+            .cover img{
+                object-fit: cover;
+                object-position: center;
+            }
+        </style>
+    </th:block>
+</head>
+<body>
+<main class="px-0" layout:fragment="main-content">
+    <div class="container card mt-3">
+        <div class="mb-4 d-flex justify-content-center border-bottom border-1 pb-3">
+            <div class="m-0 text-uppercase position-relative">
+                <span class="fs-4">Category: <span class="fw-bolder" th:text="${catArt.category.name}"></span> - Articles</span>
+                <small th:text="${catArt.articles.size()}" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                </small>
+            </div>
+        </div>
+        <div th:if="${!catArt.articles.isEmpty()}" class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">
+            <div class="col" th:each="article : ${catArt.articles}" th:object="${article}">
+                <div
+                        th:replace="~{fragments/card::readonly(*{uuid},*{title},*{thumbnail},*{author},*{description},*{categories})}"
+                ></div>
+            </div>
+        </div>
+
+        <div th:if="${catArt.articles.isEmpty()}">
+            <p class="text-center text-danger opacity-75">Empty article</p>
+        </div>
+    </div>
+</main>
+</body>
+</html>

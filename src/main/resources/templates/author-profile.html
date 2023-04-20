@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/master}"
+      th:object="${author}"
+>
+<head>
+    <title th:text="${author.name}">Article Page</title>
+    <th:block layout:fragment="substyles">
+        <style>
+            .cover{
+                width: 100%;
+                height: 350px;
+            }
+            .cover img{
+                object-fit: cover;
+                object-position: center;
+            }
+            .container.card{
+                max-width: 800px;
+            }
+        </style>
+    </th:block>
+</head>
+<body>
+<main class="px-0" layout:fragment="main-content">
+    <div class="cover">
+        <img th:src="@{${author.cover}}" class="w-100 h-100" alt="cover">
+    </div>
+    <div class="container card">
+        <div class="position-absolute start-0 translate-middle-y">
+            <div class="d-flex">
+                <div
+                        class="bg-primary rounded-pill"
+                        style="width: 120px;height: 120px;"
+                >
+                    <img th:src="@{${author.avatar}}" alt="picture" class="w-100 h-100 object-fit-cover rounded-pill border-3">
+                </div>
+                <div class="align-self-end mb-0 ms-2">
+                    <div>
+                        <h3 class="text-uppercase" th:text="${author.name}"></h3>
+                    </div>
+                    <div>
+                        <h4 class="text-primary" th:text="${#strings.prepend(author.username,'@')}"></h4>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card mb-2 bg-secondary bg-opacity-25 border-0">
+                    <div class="card-body">
+                        <p class="mb-1">Gender: <span class="text-capitalize" th:text="${author.gender}"></span></p>
+                        <address class="card-text mb-1" >
+                            Address: <span th:text="${author.address}"></span>
+                        </address>
+                        <p class="mb-1">Email: <span th:text="${author.email}"></span></p>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>

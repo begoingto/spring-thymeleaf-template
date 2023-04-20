@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en"
-      xmlns:th="http://thymeleaf.org"
+      xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 <head>
   <meta charset="UTF-8">
   <title layout:title-pattern="$CONTENT_TITLE - $LAYOUT_TITLE ">BEGOINGTO</title>
   <link rel="icon" href="https://icons.getbootstrap.com/assets/img/favicons/favicon.ico" />
   <th:block th:replace="~{fragments/styles}"></th:block>
+  <th:block layout:fragment="substyles">
+    <!-- individual web page script  -->
+  </th:block>
 </head>
 <body>
 

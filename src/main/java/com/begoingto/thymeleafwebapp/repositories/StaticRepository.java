@@ -48,7 +48,7 @@ public class StaticRepository {
                     "hbingley1@plala.or.jp",
                     "6007 Applegate Lane",
                     "https://robohash.org/doloremquesintcorrupti.png",
-                    "/resources/img/default/article.png"
+                    "https://i.pinimg.com/originals/af/97/98/af979833dc3c10cec2d84d6f3b0a212f.png"
             ));
 
             add(new Author(
@@ -58,6 +58,15 @@ public class StaticRepository {
                     "6007 Applegate Lane",
                     "https://robohash.org/consequunturautconsequatur.png",
                     "/resources/img/default/article.png"
+            ));
+
+            add(new Author(
+                    4, "Trycia Fadel",
+                    "dpierrof".toLowerCase(), "female",
+                    "dpierrof@vimeo.com",
+                    "314 South 17th Street",
+                    "https://robohash.org/porronumquamid.png",
+                    "https://th.bing.com/th/id/R.e1c660810d5ebf2f6ff3fd7a77b6d0f0?rik=Y7SdLsUVGGzwSA&pid=ImgRaw&r=0"
             ));
         }};
     }

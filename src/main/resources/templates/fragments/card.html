@@ -73,12 +73,12 @@
                 </button>
                 <button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i> Delete</button>
             </div>
-            <div th:if="${#strings.length(author)>8}">
+            <div th:if="${#strings.length(author.username)>8}">
                 <small class="text-body-secondary"
-                       th:text="${#strings.substring(author,0,8).concat('...')}">author</small>
+                       th:text="${#strings.substring(author.username,0,8).concat('...')}">author</small>
             </div>
-            <div th:if="${#strings.length(author)<8}">
-                <small class="text-body-secondary" th:text="${author}">author</small>
+            <div th:if="${#strings.length(author.username)<8}">
+                <small class="text-body-secondary" th:text="${author.username}">author</small>
             </div>
         </div>
     </div>
@@ -86,15 +86,16 @@
     <div class="card shadow-sm border-0 h-100" th:fragment="author(user)">
         <img th:src="${user.avatar}" class="card-img-top" th:alt="${user.username}">
         <div class="card-body">
-            <h5 class="card-title" th:text="${user.name}">Card title</h5>
-            <p class="mb-1">Gender: <span th:text="${user.gender}"></span></p>
+            <h5 class="card-title mb-0 text-uppercase" th:text="${user.name}">Card title</h5>
+            <b class="text-primary" th:text="${#strings.prepend(user.username,'@')}"></b>
+            <p class="mb-1">Gender: <span class="text-capitalize" th:text="${user.gender}"></span></p>
             <address class="card-text mb-1" >
                 Address: <span th:text="${user.address}"></span>
             </address>
             <p class="mb-1">Email: <span th:text="${user.email}"></span></p>
         </div>
         <div class="card-footer">
-            <a href="#" class="btn btn-primary btn-sm">View Profile</a>
+            <a th:href="@{/authors/{id}(id=${user.id})}" class="btn btn-primary btn-sm"><i class="bi bi-eye"></i> View Profile</a>
         </div>
     </div>
 </section>

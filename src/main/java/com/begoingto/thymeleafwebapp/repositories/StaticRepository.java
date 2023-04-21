@@ -19,7 +19,6 @@ import java.util.stream.Collectors;
 @Getter
 public class StaticRepository {
 
-    @Setter
     private List<Article> articles;
     private List<Author> authors;
     private List<Category> categories;

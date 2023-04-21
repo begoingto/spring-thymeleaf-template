@@ -50,11 +50,15 @@ public class ArticleServiceImpl implements ArticleService {
         if (fileUpload.isSuccess()){
             article.setUuid(UUID.randomUUID());
             article.setThumbnail("/files/" + fileUpload.fileName());
+
+            System.out.println(article);
+
             if (staticRepository.getArticles().size()==0){
                 staticRepository.getArticles().add(article);
             }else {
                 staticRepository.getArticles().add(0,article);
             }
+            System.out.println("Article create successful");
         }
         return false;
     }
@@ -71,8 +75,23 @@ public class ArticleServiceImpl implements ArticleService {
         List<Article> articles = staticRepository.getArticles().stream()
                 .filter(article -> !article.getUuid().toString().equals(uuid))
                 .toList();
-        staticRepository.setArticles(articles.size() > 0? articles : new ArrayList<>());
+//        staticRepository.setArticles(articles.size() > 0? articles : new ArrayList<>());
         return true;
+    }
+
+    @Override
+    public Integer getIndex(Article article) {
+        return staticRepository.getArticles().indexOf(article);
+    }
+
+    @Override
+    public Article updateArticle(String uuid, Article upArticle, MultipartFile file) {
+        Article oldArticle = this.getArticle(uuid);
+        int index = this.getIndex(oldArticle);
+
+        staticRepository.getArticles().set(index,upArticle);
+        System.out.println("Article update successful");
+        return upArticle;
     }
 
 }

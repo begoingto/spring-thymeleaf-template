@@ -15,7 +15,7 @@
             <h1 class="text-center">Create new Article</h1>
         </div>
         <hr>
-        <form class="row row-cols-md-2" th:action="@{/article/new}" method="post" th:object="${article}" enctype="multipart/form-data">
+        <form class="row row-cols-md-2" th:object="${article}" th:action="@{/article/update/{uuid}(uuid=${uuid})}" method="post" enctype="multipart/form-data">
             <div class="col">
                 <div class="mb-3">
                     <label for="title" class="form-label">Title</label>
@@ -28,7 +28,12 @@
                         <div class="mb-3">
                             <label for="categories" class="form-label">Categories</label>
                             <select class="form-select" id="categories" name="category_ids" multiple aria-label="multiple select categories">
-                                <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}">username</option>
+                                <option
+                                        th:each="cat : ${categories}"
+                                        th:value="${cat.id}"
+                                        th:text="${cat.name}"
+                                        th:selected="${article.categories.contains(cat)}"
+                                >username</option>
                             </select>
                         </div>
                     </div>
@@ -36,7 +41,12 @@
                         <div class="mb-3">
                             <label for="author" class="form-label">Author</label>
                             <select class="form-select" id="author" name="author_id">
-                                <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}">username</option>
+                                <option
+                                        th:each="user : ${users}"
+                                        th:value="${user.id}"
+                                        th:text="${user.username}"
+                                        th:selected="${user.id==article.author.id}"
+                                >username</option>
                             </select>
                         </div>
                     </div>
@@ -61,7 +71,7 @@
                 </div>
 
             </div>
-            <button type="submit" class="btn btn-success">Submit</button>
+            <button type="submit" class="btn btn-success">Update</button>
         </form>
     </div>
 </main>

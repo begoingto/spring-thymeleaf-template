@@ -53,21 +53,7 @@ public class ArticleController {
                          @RequestParam("thumbnailFile") MultipartFile file,
                          Model model){
 
-        // Filter Author by ID
-        Author author =  articleService.auths().stream()
-                .filter(a -> a.getId().equals(author_id))
-                .findFirst()
-                .orElse(null);
-
-        // Filter Category in
-        System.out.println(category_ids);
-        List<Category> categories = categoryService.getCategories()
-                        .stream().filter(category -> category_ids.contains(category.getId()))
-                        .toList();
-        //set author
-        article.setAuthor(author);
-        // set Categories
-        article.setCategories(categories);
+        Article article1 = setArticle(article, author_id, category_ids);
 
         if (result.hasErrors()){
             System.out.println(result.getFieldErrors());
@@ -76,6 +62,24 @@ public class ArticleController {
         }
         articleService.save(article,file);
         return "redirect:/article/new";
+    }
+
+    private Article setArticle(Article article, Integer author_id, List<Integer> category_ids) {
+        // Filter Author by ID
+        Author author =  articleService.auths().stream()
+                .filter(a -> a.getId().equals(author_id))
+                .findFirst()
+                .orElse(null);
+
+        // Filter Category in
+        List<Category> categories = categoryService.getCategories()
+                        .stream().filter(category -> category_ids.contains(category.getId()))
+                        .toList();
+        //set author
+        article.setAuthor(author);
+        // set Categories
+        article.setCategories(categories);
+        return article;
     }
 
     @GetMapping("/delete/{uuid}")
@@ -87,9 +91,23 @@ public class ArticleController {
     @GetMapping("/edit/{uuid}")
     String editArticle(@PathVariable String uuid,Model model){
         Article article = articleService.singleArticle(uuid);
+        System.out.println(article);
         model.addAttribute("article",article);
         model.addAttribute("users",articleService.auths());
         model.addAttribute("categories",categoryService.getCategories());
         return "article-edit";
+    }
+
+    @PostMapping("/update/{uuid}")
+    String updateArticle(@PathVariable String uuid,
+                         @ModelAttribute @Valid Article article,
+                         BindingResult result,
+                         @RequestParam("author_id") Integer author_id,
+                         @RequestParam("category_ids") List<Integer> category_ids,
+                         @RequestParam("thumbnailFile") MultipartFile file){
+        Article reqArticle = setArticle(article, author_id, category_ids);
+        System.out.println(reqArticle);
+        Article a = articleService.updateArticle(uuid, reqArticle,file);
+        return "redirect:/article";
     }
 }

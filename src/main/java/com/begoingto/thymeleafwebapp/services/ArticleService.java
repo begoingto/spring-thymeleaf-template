@@ -20,4 +20,8 @@ public interface ArticleService {
 
     boolean deleteArticle(String uuid);
 
+    Integer getIndex(Article article);
+
+    Article updateArticle(String uuid, Article article, MultipartFile file);
+
 }

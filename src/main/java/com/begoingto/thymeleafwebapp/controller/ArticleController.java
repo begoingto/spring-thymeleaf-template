@@ -83,4 +83,13 @@ public class ArticleController {
         articleService.deleteArticle(uuid);
         return "redirect:/article";
     }
+
+    @GetMapping("/edit/{uuid}")
+    String editArticle(@PathVariable String uuid,Model model){
+        Article article = articleService.singleArticle(uuid);
+        model.addAttribute("article",article);
+        model.addAttribute("users",articleService.auths());
+        model.addAttribute("categories",categoryService.getCategories());
+        return "article-edit";
+    }
 }

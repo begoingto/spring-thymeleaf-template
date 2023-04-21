@@ -93,8 +93,8 @@
             <div class="btn-group">
                 <a th:href="@{/article/{uuid}(uuid=${uuid})}" class="btn btn-sm btn-outline-success"><i
                         class="bi bi-eye"></i> View</a>
-                <button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i> Edit
-                </button>
+                <a th:href="@{/article/edit/{uuid}(uuid=${uuid})}" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i> Edit
+                </a>
                 <button type="button"
                         class="btn btn-sm btn-outline-danger dropdown-toggle"
                         data-bs-toggle="dropdown" aria-expanded="false"

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/master}"
+>
+<head>
+    <title>Edit Article</title>
+</head>
+<body>
+<main class="px-3 container" layout:fragment="main-content">
+    <div class="py-5">
+        <div class="position-relative">
+            <a href="/article" class="btn btn-warning btn-sm position-absolute top-50 start-0 translate-middle-y"><i class="bi bi-arrow-90deg-left"></i> Back</a>
+            <h1 class="text-center">Create new Article</h1>
+        </div>
+        <hr>
+        <form class="row row-cols-md-2" th:action="@{/article/new}" method="post" th:object="${article}" enctype="multipart/form-data">
+            <div class="col">
+                <div class="mb-3">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" class="form-control" id="title" th:field="*{title}" placeholder="Enter post title...">
+                    <div  class="form-text text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}">We'll never share your .</div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="categories" class="form-label">Categories</label>
+                            <select class="form-select" id="categories" name="category_ids" multiple aria-label="multiple select categories">
+                                <option th:each="cat : ${categories}" th:value="${cat.id}" th:text="${cat.name}">username</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3">
+                            <label for="author" class="form-label">Author</label>
+                            <select class="form-select" id="author" name="author_id">
+                                <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.username}">username</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Description</label>
+                    <textarea class="form-control" id="description"  placeholder="Enter description..." th:field="*{description}" rows="5"></textarea>
+                </div>
+
+            </div>
+            <div class="col">
+                <div class="mb-3">
+                    <label for="thumbnail" class="form-label">Upload thumbnail</label>
+                    <input class="form-control" type="file" id="thumbnail" name="thumbnailFile">
+                </div>
+                <div class="d-flex justify-content-center">
+                    <label for="thumbnail" class="w-50">
+                        <img th:src="@{${article.thumbnail}}" alt="picture"
+                             class="bd-placeholder-img card-img-top w-100 border" id="placeholder">
+                    </label>
+                </div>
+
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
+</main>
+<th:block layout:fragment="subscript">
+    <script>
+        const thumbnailFile = document.getElementById("thumbnail")
+        const placeholder = document.getElementById("placeholder")
+
+        thumbnailFile.onchange = (evt) => {
+            const [file] = thumbnailFile.files
+            if (file){
+                placeholder.src= URL.createObjectURL(file)
+            }
+        }
+    </script>
+</th:block>
+</body>
+</html>

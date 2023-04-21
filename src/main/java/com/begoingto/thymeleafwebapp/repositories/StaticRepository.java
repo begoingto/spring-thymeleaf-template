@@ -79,7 +79,7 @@ public class StaticRepository {
         Random random = new Random();
         articles = new ArrayList<>() {{
 
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 15; i++) {
 
                 add(
                         new Article(

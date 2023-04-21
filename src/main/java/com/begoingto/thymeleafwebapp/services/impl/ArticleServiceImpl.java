@@ -46,8 +46,8 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public boolean save(Article article, MultipartFile file) {
-        FileUpload fileUpload = fileUploadService.uploadSingle(file);
-        if (fileUpload.isSuccess()){
+        FileUpload fileUpload = getFileUpload(file);
+        if (getFileUpload(file).isSuccess()){
             article.setUuid(UUID.randomUUID());
             article.setThumbnail("/files/" + fileUpload.fileName());
             if (staticRepository.getArticles().size()==0){
@@ -58,6 +58,10 @@ public class ArticleServiceImpl implements ArticleService {
             System.out.println("Article create successful");
         }
         return true;
+    }
+
+    private FileUpload getFileUpload(MultipartFile file) {
+        return fileUploadService.uploadSingle(file);
     }
 
     @Override
@@ -81,13 +85,21 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Article updateArticle(String uuid, Article upArticle, MultipartFile file) {
+    public Article updateArticle(String uuid, Article reqArticle, MultipartFile file) {
         Article oldArticle = this.getArticle(uuid);
         int index = this.getIndex(oldArticle);
-
-        staticRepository.getArticles().set(index,upArticle);
+        if (!file.getOriginalFilename().isEmpty()){
+            FileUpload fileUpload = getFileUpload(file);
+            if (getFileUpload(file).isSuccess()){
+                reqArticle.setThumbnail("/files/" + fileUpload.fileName());
+                System.out.println("Article change successful");
+            }
+        }else {
+            reqArticle.setThumbnail(oldArticle.getThumbnail());
+        }
+        staticRepository.getArticles().set(index,reqArticle);
         System.out.println("Article update successful");
-        return upArticle;
+        return reqArticle;
     }
 
 }

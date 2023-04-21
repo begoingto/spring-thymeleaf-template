@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 @RequiredArgsConstructor
@@ -53,18 +52,18 @@ public class ArticleController {
                          @RequestParam("thumbnailFile") MultipartFile file,
                          Model model){
 
-        Article article1 = setArticle(article, author_id, category_ids);
+        Article article1 = setRequestArticle(article, author_id, category_ids);
 
         if (result.hasErrors()){
             System.out.println(result.getFieldErrors());
             model.addAttribute("article",article);
             return "article-new";
         }
-        articleService.save(article,file);
+        articleService.save(article1,file);
         return "redirect:/article";
     }
 
-    private Article setArticle(Article article, Integer author_id, List<Integer> category_ids) {
+    private Article setRequestArticle(Article article, Integer author_id, List<Integer> category_ids) {
         // Filter Author by ID
         Author author =  articleService.auths().stream()
                 .filter(a -> a.getId().equals(author_id))
@@ -91,7 +90,6 @@ public class ArticleController {
     @GetMapping("/edit/{uuid}")
     String editArticle(@PathVariable String uuid,Model model){
         Article article = articleService.singleArticle(uuid);
-        System.out.println(article);
         model.addAttribute("article",article);
         model.addAttribute("users",articleService.auths());
         model.addAttribute("categories",categoryService.getCategories());
@@ -105,8 +103,7 @@ public class ArticleController {
                          @RequestParam("author_id") Integer author_id,
                          @RequestParam("category_ids") List<Integer> category_ids,
                          @RequestParam("thumbnailFile") MultipartFile file){
-        Article reqArticle = setArticle(article, author_id, category_ids);
-        System.out.println(reqArticle);
+        Article reqArticle = setRequestArticle(article, author_id, category_ids);
         Article a = articleService.updateArticle(uuid, reqArticle,file);
         return "redirect:/article";
     }

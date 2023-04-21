@@ -6,6 +6,7 @@ import com.begoingto.thymeleafwebapp.models.Category;
 import com.github.javafaker.Faker;
 import jakarta.annotation.PostConstruct;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 @Getter
 public class StaticRepository {
 
+    @Setter
     private List<Article> articles;
     private List<Author> authors;
     private List<Category> categories;
@@ -77,7 +79,7 @@ public class StaticRepository {
         Random random = new Random();
         articles = new ArrayList<>() {{
 
-            for (int i = 0; i < 15; i++) {
+            for (int i = 0; i < 5; i++) {
 
                 add(
                         new Article(

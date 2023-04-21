@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -32,11 +33,15 @@ public class ArticleServiceImpl implements ArticleService {
 
     @Override
     public Article singleArticle(String uuid){
-        Article article =  staticRepository.getArticles().stream()
+        Article article = getArticle(uuid);
+        return article;
+    }
+
+    private Article getArticle(String uuid) {
+        return staticRepository.getArticles().stream()
                 .filter(a -> a.getUuid().toString().equals(uuid))
                 .findFirst()
-                 .orElse(null);
-        return article;
+                .orElse(null);
     }
 
     @Override
@@ -45,7 +50,11 @@ public class ArticleServiceImpl implements ArticleService {
         if (fileUpload.isSuccess()){
             article.setUuid(UUID.randomUUID());
             article.setThumbnail("/files/" + fileUpload.fileName());
-            staticRepository.getArticles().add(0,article);
+            if (staticRepository.getArticles().size()==0){
+                staticRepository.getArticles().add(article);
+            }else {
+                staticRepository.getArticles().add(0,article);
+            }
         }
         return false;
     }
@@ -55,6 +64,15 @@ public class ArticleServiceImpl implements ArticleService {
         return staticRepository.getArticles().stream()
                 .filter(article -> article.getAuthor().equals(author))
                 .toList();
+    }
+
+    @Override
+    public boolean deleteArticle(String uuid) {
+        List<Article> articles = staticRepository.getArticles().stream()
+                .filter(article -> !article.getUuid().toString().equals(uuid))
+                .toList();
+        staticRepository.setArticles(articles.size() > 0? articles : new ArrayList<>());
+        return true;
     }
 
 }

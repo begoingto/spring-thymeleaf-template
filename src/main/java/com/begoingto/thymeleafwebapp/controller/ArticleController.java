@@ -77,4 +77,10 @@ public class ArticleController {
         articleService.save(article,file);
         return "redirect:/article/new";
     }
+
+    @GetMapping("/delete/{uuid}")
+    String deleteArticle(@PathVariable String uuid){
+        articleService.deleteArticle(uuid);
+        return "redirect:/article";
+    }
 }

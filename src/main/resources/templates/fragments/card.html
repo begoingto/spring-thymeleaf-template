@@ -95,7 +95,22 @@
                         class="bi bi-eye"></i> View</a>
                 <button type="button" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i> Edit
                 </button>
-                <button type="button" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash"></i> Delete</button>
+                <button type="button"
+                        class="btn btn-sm btn-outline-danger dropdown-toggle"
+                        data-bs-toggle="dropdown" aria-expanded="false"
+                ><i class="bi bi-trash"></i> Delete</button>
+                <ul class="dropdown-menu py-0">
+                    <li class="dropdown-item  c-dropdown">
+                        <h6 class="text-center mb-0">Are you sure!</h6>
+                         <p class="text-center mb-0">U want to delete it.</p>
+                    </li>
+                    <li class="dropdown-item text-secondary d-flex justify-content-between c-dropdown">
+                        <button type="button" class="btn btn-warning btn-sm"><small><i class="bi bi-x-circle"></i> Cancel</small></button>
+                        <a
+                                th:href="@{/article/delete/{uuid}(uuid=${uuid})}"
+                                class="btn btn-danger btn-sm"><small><i class="bi bi-check2-circle"></i> Yes</small></a>
+                    </li>
+                </ul>
             </div>
             <div th:if="${#strings.length(author.username)>8}">
                 <small class="text-body-secondary"

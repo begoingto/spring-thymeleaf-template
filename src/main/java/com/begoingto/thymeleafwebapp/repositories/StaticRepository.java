@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 @Getter
 public class StaticRepository {
 
+    @Setter
     private List<Article> articles;
     private List<Author> authors;
     private List<Category> categories;
@@ -78,7 +79,7 @@ public class StaticRepository {
         Random random = new Random();
         articles = new ArrayList<>() {{
 
-            for (int i = 0; i < 15; i++) {
+            for (int i = 0; i < 3; i++) {
 
                 add(
                         new Article(

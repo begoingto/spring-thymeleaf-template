@@ -61,7 +61,7 @@ public class ArticleController {
             return "article-new";
         }
         articleService.save(article,file);
-        return "redirect:/article/new";
+        return "redirect:/article";
     }
 
     private Article setArticle(Article article, Integer author_id, List<Integer> category_ids) {

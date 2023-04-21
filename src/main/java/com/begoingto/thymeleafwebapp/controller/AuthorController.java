@@ -23,7 +23,7 @@ public class AuthorController {
     @GetMapping
     String authors(Model model){
         model.addAttribute("authors",authorService.getAuthors());
-        return "authors";
+        return "authors/authors";
     }
 
     @GetMapping("/{id}")
@@ -32,7 +32,12 @@ public class AuthorController {
         List<Article> articles = articleService.getArticleByAuthor(author);
         author.setArticles(articles);
         model.addAttribute("author",author);
-        return "author-profile";
+        return "authors/author-profile";
+    }
+
+    @GetMapping("/new")
+    String newAuthor(){
+        return "authors/author-new";
     }
 
 }

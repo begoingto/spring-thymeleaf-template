@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/master}"
+>
+<head>
+    <title>Create New Article</title>
+</head>
+<body>
+<main class="px-3 container" layout:fragment="main-content">
+    <div class="py-5">
+        <div class="position-relative">
+            <a href="/authors" class="btn btn-warning btn-sm position-absolute top-50 start-0 translate-middle-y"><i class="bi bi-arrow-90deg-left"></i> Back</a>
+            <h1 class="text-center">Create new Author</h1>
+        </div>
+        <hr>
+        <form class="row row-cols-md-2" action="#" method="post" enctype="multipart/form-data">
+            <div class="col">
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Name</label>
+                            <input type="text" class="form-control" id="name"  placeholder="Enter text...">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="username"  placeholder="Enter text...">
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label class="form-label">Gender</label>
+                            <br>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="male" value="male" checked>
+                                <label class="form-check-label" for="male">Male</label>
+                            </div>
+                            <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                                <label class="form-check-label" for="female">Female</label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="mb-3">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="text" class="form-control" id="email"  placeholder="Enter text...">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="description" class="form-label">Address</label>
+                    <textarea class="form-control" id="description"  placeholder="Enter address..." rows="3"></textarea>
+                </div>
+
+            </div>
+            <div class="col">
+                <div class="row justify-content-center">
+                    <div class="col-6">
+                        <label for="thumbnail" class="form-label">Upload Profile</label>
+                        <div class="d-flex justify-content-center">
+                            <label for="thumbnail" style="width: 145px;height: 145px">
+                                <img th:src="@{/resources/img/default/no_image.jpg}" alt="picture"
+                                     class="bd-placeholder-img card-img-top w-100 border h-100 object-fit-cover rounded-pill" id="placeholder">
+                            </label>
+                        </div>
+                        <div class="mb-3">
+                            <input class="form-control" type="file" id="thumbnail" name="thumbnailFile">
+                        </div>
+                    </div>
+                </div>
+                <label for="thumbnail" class="form-label">Upload Cover</label>
+                <label for="input_cover" class="w-100" style="height: 250px">
+                    <img th:src="@{/resources/img/default/no_image.jpg}" alt="picture"
+                         class="bd-placeholder-img border-0 card-img-top w-100 border h-100 object-fit-cover" id="cover">
+                </label>
+                <div class="mb-3">
+                    <input class="form-control" type="file" id="input_cover" name="cover">
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+    </div>
+</main>
+<th:block layout:fragment="subscript">
+    <script>
+        const thumbnailFile = document.getElementById("thumbnail")
+        const placeholder = document.getElementById("placeholder")
+
+        thumbnailFile.onchange = (evt) => {
+            const [file] = thumbnailFile.files
+            if (file){
+                placeholder.src= URL.createObjectURL(file)
+            }
+        }
+
+        const input_cover = document.getElementById("input_cover")
+        const cover = document.getElementById("cover")
+
+        input_cover.onchange = (evt) => {
+            const [file] = input_cover.files
+            if (file){
+                cover.src= URL.createObjectURL(file)
+            }
+        }
+    </script>
+</th:block>
+</body>
+</html>

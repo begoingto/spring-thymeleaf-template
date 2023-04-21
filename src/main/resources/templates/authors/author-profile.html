@@ -9,15 +9,17 @@
     <title th:text="${author.name}">Article Page</title>
     <th:block layout:fragment="substyles">
         <style>
-            .cover{
+            .cover {
                 width: 100%;
                 height: 350px;
             }
-            .cover img{
+
+            .cover img {
                 object-fit: cover;
                 object-position: center;
             }
-            .container.card{
+
+            .container.card {
                 max-width: 900px;
             }
         </style>
@@ -35,7 +37,8 @@
                         class="bg-info rounded-pill"
                         style="width: 120px;height: 120px;"
                 >
-                    <img th:src="@{${author.avatar}}" alt="picture" class="w-100 h-100 object-fit-cover rounded-pill border-3">
+                    <img th:src="@{${author.avatar}}" alt="picture"
+                         class="w-100 h-100 object-fit-cover rounded-pill border-3">
                 </div>
                 <div class="align-self-end mb-0 ms-2">
                     <div>
@@ -60,18 +63,42 @@
                 <div class="card mb-2 bg-secondary bg-opacity-25 border-0">
                     <div class="card-body">
                         <p class="mb-1">Gender: <span class="text-capitalize" th:text="${author.gender}"></span></p>
-                        <address class="card-text mb-1" >
+                        <address class="card-text mb-1">
                             Address: <span th:text="${author.address}"></span>
                         </address>
                         <p class="mb-1">Email: <span th:text="${author.email}"></span></p>
                     </div>
+                </div>
+                <div class="btn-group">
+                    <a th:href="@{/article}" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i>
+                        Edit
+                    </a>
+                    <button type="button"
+                            class="btn btn-sm btn-outline-danger dropdown-toggle"
+                            data-bs-toggle="dropdown" aria-expanded="false"
+                    ><i class="bi bi-trash"></i> Delete
+                    </button>
+                    <ul class="dropdown-menu py-0">
+                        <li class="dropdown-item  c-dropdown">
+                            <h6 class="text-center mb-0">Are you sure!</h6>
+                            <p class="text-center mb-0">U want to delete it.</p>
+                        </li>
+                        <li class="dropdown-item text-secondary d-flex justify-content-between c-dropdown">
+                            <button type="button" class="btn btn-warning btn-sm"><small><i class="bi bi-x-circle"></i>
+                                Cancel</small></button>
+                            <a
+                                    th:href="@{/article}"
+                                    class="btn btn-danger btn-sm"><small><i class="bi bi-check2-circle"></i> Yes</small></a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
         <div class="mb-4 d-flex justify-content-center border-bottom border-1 pb-3">
             <div class="m-0 text-uppercase position-relative">
                 <span class="fs-4 fw-bolder">Your Articles</span>
-                <small th:text="${author.articles.size()}" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                <small th:text="${author.articles.size()}"
+                       class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                 </small>
             </div>
         </div>

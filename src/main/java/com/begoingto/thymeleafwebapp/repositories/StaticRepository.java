@@ -33,7 +33,7 @@ public class StaticRepository {
                 1, "Begoingto Me",
                 "begoingto".toLowerCase(), "male",
                 "begoingto.me@gmail.com",
-                "1745 T Street Southeast",
+                faker.address().fullAddress()+", "+ faker.country().name(),
                 "https://robohash.org/hicveldicta.png",
                 "/resources/img/default/article.png"
         );
@@ -54,7 +54,7 @@ public class StaticRepository {
                         faker.book().author(),
                         faker.name().username().toLowerCase(), gender.get(random.nextInt(2)),
                         faker.internet().safeEmailAddress(),
-                        faker.address().fullAddress(),
+                        faker.address().fullAddress()+", "+ faker.country().name(),
                         avatars.get(random.nextInt(0,avatars.size())),
                         "https://th.bing.com/th/id/R.fd7ee12cef5592a445403b4ffb33c182?rik=TYNv1gkkSzqb7w&pid=ImgRaw&r=0"
                 ));
@@ -69,7 +69,7 @@ public class StaticRepository {
 
         articles = new ArrayList<>() {{
 
-            for (int i = 0; i < 3; i++) {
+            for (int i = 0; i < 12; i++) {
 
                 add(
                         new Article(

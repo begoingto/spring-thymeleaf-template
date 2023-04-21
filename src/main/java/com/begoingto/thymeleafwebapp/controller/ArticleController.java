@@ -26,14 +26,14 @@ public class ArticleController {
     String articlePage(Model model){
         List<Article> articles = articleService.findAll();
         model.addAttribute("articles", articles);
-        return "article";
+        return "articles/article";
     }
 
     @GetMapping("/{uuid}")
     String singleArticle(@PathVariable String uuid, Model model){
         Article article = articleService.singleArticle(uuid);
         model.addAttribute("article",article);
-        return "single-article";
+        return "/articles/single-article";
     }
 
     @GetMapping("/new")
@@ -41,7 +41,7 @@ public class ArticleController {
         model.addAttribute("article",article);
         model.addAttribute("users",articleService.auths());
         model.addAttribute("categories",categoryService.getCategories());
-        return "article-new";
+        return "articles/article-new";
     }
 
     @PostMapping(value = "/new")
@@ -57,7 +57,7 @@ public class ArticleController {
         if (result.hasErrors()){
             System.out.println(result.getFieldErrors());
             model.addAttribute("article",article);
-            return "article-new";
+            return "articles/article-new";
         }
         articleService.save(article1,file);
         return "redirect:/article";
@@ -93,7 +93,7 @@ public class ArticleController {
         model.addAttribute("article",article);
         model.addAttribute("users",articleService.auths());
         model.addAttribute("categories",categoryService.getCategories());
-        return "article-edit";
+        return "articles/article-edit";
     }
 
     @PostMapping("/update/{uuid}")

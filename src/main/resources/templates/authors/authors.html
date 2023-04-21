@@ -10,7 +10,8 @@
 <body>
 <main class="px-3 container" layout:fragment="main-content">
     <div class="py-5">
-        <div class="mb-4 border-bottom border-1 pb-3">
+        <div class="mb-4 border-bottom border-1 pb-3 d-flex justify-content-between">
+            <a href="/authors/new" class="btn btn-primary"><i class="bi bi-person-fill-add"></i> New Authors</a>
             <h4>Total authors: <span th:text="${authors.size()}"></span></h4>
         </div>
         <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-3">

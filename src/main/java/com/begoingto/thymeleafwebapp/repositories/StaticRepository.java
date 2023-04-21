@@ -9,17 +9,13 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.UUID;
+
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Repository
 @Getter
 public class StaticRepository {
-
-    @Setter
     private List<Article> articles;
     private List<Author> authors;
     private List<Category> categories;
@@ -32,43 +28,37 @@ public class StaticRepository {
 
     @PostConstruct
     void init() {
+        Random random = new Random();
         Author author = new Author(
                 1, "Begoingto Me",
                 "begoingto".toLowerCase(), "male",
-                "atuny0@sohu.com",
+                "begoingto.me@gmail.com",
                 "1745 T Street Southeast",
                 "https://robohash.org/hicveldicta.png",
                 "/resources/img/default/article.png"
         );
 
+        List<String> gender = new ArrayList<>(List.of("male","Female"));
+        List<String> avatars = new ArrayList<>(List.of(
+                "https://robohash.org/doloremquesintcorrupti.png",
+                "https://robohash.org/consequunturautconsequatur.png",
+                "https://robohash.org/hicveldicta.png",
+                "https://robohash.org/porronumquamid.png"
+        ));
+
         authors = new ArrayList<>(){{
             add(author);
-            add(new Author(
-                    2, "Sheldon Quigley",
-                    "Sheldon".toLowerCase(), "male",
-                    "hbingley1@plala.or.jp",
-                    "6007 Applegate Lane",
-                    "https://robohash.org/doloremquesintcorrupti.png",
-                    "https://i.pinimg.com/originals/af/97/98/af979833dc3c10cec2d84d6f3b0a212f.png"
-            ));
-
-            add(new Author(
-                    3, "Terrill Hills",
-                    "Terrill".toLowerCase(), "male",
-                    "rshawe2@51.la",
-                    "6007 Applegate Lane",
-                    "https://robohash.org/consequunturautconsequatur.png",
-                    "/resources/img/default/article.png"
-            ));
-
-            add(new Author(
-                    4, "Trycia Fadel",
-                    "dpierrof".toLowerCase(), "female",
-                    "dpierrof@vimeo.com",
-                    "314 South 17th Street",
-                    "https://robohash.org/porronumquamid.png",
-                    "https://th.bing.com/th/id/R.e1c660810d5ebf2f6ff3fd7a77b6d0f0?rik=Y7SdLsUVGGzwSA&pid=ImgRaw&r=0"
-            ));
+            for (int i=2;i<5;i++){
+                add(new Author(
+                        i,
+                        faker.book().author(),
+                        faker.name().username().toLowerCase(), gender.get(random.nextInt(2)),
+                        faker.internet().safeEmailAddress(),
+                        faker.address().fullAddress(),
+                        avatars.get(random.nextInt(0,avatars.size())),
+                        "https://th.bing.com/th/id/R.fd7ee12cef5592a445403b4ffb33c182?rik=TYNv1gkkSzqb7w&pid=ImgRaw&r=0"
+                ));
+            }
         }};
 
         categories = new ArrayList<>(){{
@@ -76,7 +66,7 @@ public class StaticRepository {
                 add(new Category(i,faker.pokemon().name(),faker.color().hex()));
             }
         }};
-        Random random = new Random();
+
         articles = new ArrayList<>() {{
 
             for (int i = 0; i < 3; i++) {

@@ -91,8 +91,9 @@ public class AuthorServiceImpl implements AuthorService {
     public boolean deleteAuthor(Integer id) {
         Author author = this.getAuthorById(id);
         staticRepository.getAuthors().remove(author);
-        staticRepository.getArticles().stream()
-                .filter(article -> !article.getAuthor().getId().equals(id));
+        author.getArticles().forEach(article -> {
+            staticRepository.getArticles().remove(article);
+        });
         return true;
     }
 }

@@ -67,7 +67,7 @@ public class AuthorController {
         return "authors/edit-profile";
     }
 
-    @PutMapping("/update/{id}")
+    @PostMapping("/update/{id}")
     String updateAuthor(@PathVariable Integer id,
                         @ModelAttribute @Valid Author author,
                         BindingResult result,

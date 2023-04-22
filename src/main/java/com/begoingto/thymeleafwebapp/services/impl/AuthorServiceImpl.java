@@ -4,20 +4,20 @@ import com.begoingto.thymeleafwebapp.models.Article;
 import com.begoingto.thymeleafwebapp.models.Author;
 import com.begoingto.thymeleafwebapp.models.FileUpload;
 import com.begoingto.thymeleafwebapp.repositories.StaticRepository;
+import com.begoingto.thymeleafwebapp.services.ArticleService;
 import com.begoingto.thymeleafwebapp.services.AuthorService;
 import com.begoingto.thymeleafwebapp.services.FileUploadService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
 public class AuthorServiceImpl implements AuthorService {
     private final StaticRepository staticRepository;
     private final FileUploadService fileUploadService;
+    private final ArticleService articleService;
     @Override
     public List<Author> getAuthors() {
         return staticRepository.getAuthors();
@@ -48,5 +48,40 @@ public class AuthorServiceImpl implements AuthorService {
                 .filter(a -> a.getId().equals(id))
                 .findFirst()
                 .orElse(null);
+    }
+
+    @Override
+    public int getIndex(Author author) {
+        return staticRepository.getAuthors().indexOf(author);
+    }
+
+    @Override
+    public Author updateAuthor(Integer id, Author author, MultipartFile profile, MultipartFile cover) {
+        Author oldAuthor = getAuthorById(id);
+        int index = getIndex(oldAuthor);
+        if (!profile.isEmpty()){
+            FileUpload fileProfile = getFileUpload(profile);
+            if (fileProfile.isSuccess()){
+                author.setAvatar("/files/" + fileProfile.fileName());
+                System.out.println("Author update profile successful");
+            }
+
+        }else {
+            author.setAvatar(oldAuthor.getAvatar());
+        }
+        if (!cover.isEmpty()){
+            FileUpload fileCover = getFileUpload(cover);
+            author.setCover("/files/" + fileCover.fileName());
+            System.out.println("Author update cover successful");
+        }else {
+            author.setCover(oldAuthor.getCover());
+        }
+        staticRepository.getArticles().stream().filter(article -> article.getAuthor().getId().equals(author.getId()))
+                        .forEach(art -> {
+                          art.setAuthor(author);
+                        });
+        staticRepository.getAuthors().set(index,author);
+        System.out.println("Author update successful");
+        return author;
     }
 }

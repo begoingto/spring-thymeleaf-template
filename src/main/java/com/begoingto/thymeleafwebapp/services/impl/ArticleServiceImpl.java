@@ -61,9 +61,9 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<Article> getArticleByAuthor(Author author) {
+    public List<Article> getArticleByAuthor(Integer id) {
         return staticRepository.getArticles().stream()
-                .filter(article -> article.getAuthor().equals(author))
+                .filter(article -> article.getAuthor().getId().equals(id))
                 .toList();
     }
 

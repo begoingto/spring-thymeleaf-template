@@ -38,7 +38,7 @@ public class StaticRepository {
                 "/resources/img/default/article.png"
         );
 
-        List<String> gender = new ArrayList<>(List.of("male","Female"));
+        List<String> gender = new ArrayList<>(List.of("male","female"));
         List<String> avatars = new ArrayList<>(List.of(
                 "https://robohash.org/doloremquesintcorrupti.png",
                 "https://robohash.org/consequunturautconsequatur.png",

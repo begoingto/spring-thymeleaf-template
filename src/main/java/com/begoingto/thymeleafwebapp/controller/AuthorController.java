@@ -30,7 +30,7 @@ public class AuthorController {
     @GetMapping("/{id}")
     String authorProfile(@PathVariable Integer id,Model model){
         Author author = authorService.getAuthorById(id);
-        List<Article> articles = articleService.getArticleByAuthor(author);
+        List<Article> articles = articleService.getArticleByAuthor(author.getId());
         author.setArticles(articles);
         model.addAttribute("author",author);
         return "authors/author-profile";
@@ -60,4 +60,25 @@ public class AuthorController {
         return "redirect:/authors";
     }
 
+    @GetMapping("/edit/{id}")
+    String editAuthor(@PathVariable Integer id,Model model){
+        Author author = authorService.getAuthorById(id);
+        model.addAttribute("author", author);
+        return "authors/edit-profile";
+    }
+
+    @PostMapping("/update/{id}")
+    String updateAuthor(@PathVariable Integer id,
+                        @ModelAttribute @Valid Author author,
+                        BindingResult result,
+                        @RequestParam("profile") MultipartFile profile,
+                        @RequestParam("coverFile") MultipartFile cover
+    ){
+        System.out.println(profile);
+        if (result.hasErrors()){
+            System.out.println(result.getFieldErrors());
+        }
+        authorService.updateAuthor(id,author,profile,cover);
+        return "redirect:/authors";
+    }
 }

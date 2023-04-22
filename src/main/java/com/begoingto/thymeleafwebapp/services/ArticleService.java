@@ -16,7 +16,7 @@ public interface ArticleService {
 
     boolean save(Article article, MultipartFile file);
 
-    List<Article> getArticleByAuthor(Author author);
+    List<Article> getArticleByAuthor(Integer id);
 
     boolean deleteArticle(String uuid);
 

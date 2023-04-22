@@ -70,11 +70,11 @@
                     </div>
                 </div>
                 <div class="btn-group">
-                    <a th:href="@{/article}" class="btn btn-sm btn-outline-primary"><i class="bi bi-pencil-square"></i>
+                    <a th:href="@{/authors/edit/{id}(id=${author.id})}" class="btn btn-sm btn-outline-primary border-0"><i class="bi bi-pencil-square"></i>
                         Edit
                     </a>
                     <button type="button"
-                            class="btn btn-sm btn-outline-danger dropdown-toggle"
+                            class="btn btn-sm btn-outline-danger dropdown-toggle border-0"
                             data-bs-toggle="dropdown" aria-expanded="false"
                     ><i class="bi bi-trash"></i> Delete
                     </button>

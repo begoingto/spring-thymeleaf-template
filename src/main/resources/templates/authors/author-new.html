@@ -15,20 +15,20 @@
             <h1 class="text-center">Create new Author</h1>
         </div>
         <hr>
-        <form class="row row-cols-md-2" action="#" method="post" enctype="multipart/form-data">
+        <form class="row row-cols-md-2" th:object="${author}" th:action="@{/authors/new}" method="post" enctype="multipart/form-data">
             <div class="col">
 
                 <div class="row">
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control" id="name"  placeholder="Enter text...">
+                            <input type="text" th:field="*{name}" class="form-control" id="name"  placeholder="Enter text...">
                         </div>
                     </div>
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input type="text" class="form-control" id="username"  placeholder="Enter text...">
+                            <input type="text" th:field="*{username}" class="form-control" id="username"  placeholder="Enter text...">
                         </div>
                     </div>
                     <div class="col-6">
@@ -36,11 +36,11 @@
                             <label class="form-label">Gender</label>
                             <br>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="gender" id="male" value="male" checked>
+                                <input class="form-check-input" type="radio" th:field="*{gender}" id="male" value="male" checked>
                                 <label class="form-check-label" for="male">Male</label>
                             </div>
                             <div class="form-check form-check-inline">
-                                <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+                                <input class="form-check-input" type="radio" th:field="*{gender}" id="female" value="female">
                                 <label class="form-check-label" for="female">Female</label>
                             </div>
                         </div>
@@ -48,14 +48,14 @@
                     <div class="col-6">
                         <div class="mb-3">
                             <label for="email" class="form-label">Email</label>
-                            <input type="text" class="form-control" id="email"  placeholder="Enter text...">
+                            <input type="text" th:field="*{email}" class="form-control" id="email"  placeholder="Enter text...">
                         </div>
                     </div>
                 </div>
 
                 <div class="mb-3">
-                    <label for="description" class="form-label">Address</label>
-                    <textarea class="form-control" id="description"  placeholder="Enter address..." rows="3"></textarea>
+                    <label for="address" class="form-label">Address</label>
+                    <textarea th:field="*{address}" class="form-control" id="address"  placeholder="Enter address..." rows="3"></textarea>
                 </div>
 
             </div>
@@ -70,7 +70,7 @@
                             </label>
                         </div>
                         <div class="mb-3">
-                            <input class="form-control" type="file" id="thumbnail" name="thumbnailFile">
+                            <input class="form-control" type="file" id="thumbnail" name="profile">
                         </div>
                     </div>
                 </div>
@@ -80,7 +80,7 @@
                          class="bd-placeholder-img border-0 card-img-top w-100 border h-100 object-fit-cover" id="cover">
                 </label>
                 <div class="mb-3">
-                    <input class="form-control" type="file" id="input_cover" name="cover">
+                    <input class="form-control" type="file" id="input_cover" name="coverFile">
                 </div>
             </div>
             <button type="submit" class="btn btn-success">Submit</button>

@@ -4,12 +4,13 @@ import com.begoingto.thymeleafwebapp.models.Article;
 import com.begoingto.thymeleafwebapp.models.Author;
 import com.begoingto.thymeleafwebapp.services.ArticleService;
 import com.begoingto.thymeleafwebapp.services.AuthorService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -36,8 +37,27 @@ public class AuthorController {
     }
 
     @GetMapping("/new")
-    String newAuthor(){
+    String newAuthor(Author author, Model model){
+        model.addAttribute("author",author);
         return "authors/author-new";
+    }
+
+    @PostMapping("/new")
+    String saveAuthor(
+            @ModelAttribute @Valid Author author,
+            BindingResult result,
+            @RequestParam("profile") MultipartFile profile,
+            @RequestParam("coverFile") MultipartFile cover,
+            Model model
+    ){
+        System.out.println(profile);
+        if (result.hasErrors()){
+            System.out.println(result.getFieldErrors());
+            model.addAttribute("author",author);
+            return "authors/author-new";
+        }
+        authorService.saveAuthor(author,profile,cover);
+        return "redirect:/authors";
     }
 
 }

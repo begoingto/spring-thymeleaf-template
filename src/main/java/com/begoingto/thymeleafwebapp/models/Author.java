@@ -1,8 +1,6 @@
 package com.begoingto.thymeleafwebapp.models;
 
 import lombok.*;
-import org.springframework.lang.Nullable;
-
 import java.util.List;
 
 @Data

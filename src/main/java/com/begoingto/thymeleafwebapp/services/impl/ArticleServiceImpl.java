@@ -7,14 +7,10 @@ import com.begoingto.thymeleafwebapp.repositories.StaticRepository;
 import com.begoingto.thymeleafwebapp.services.ArticleService;
 import com.begoingto.thymeleafwebapp.services.FileUploadService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -92,7 +88,7 @@ public class ArticleServiceImpl implements ArticleService {
             FileUpload fileUpload = getFileUpload(file);
             if (getFileUpload(file).isSuccess()){
                 reqArticle.setThumbnail("/files/" + fileUpload.fileName());
-                System.out.println("Article change successful");
+                System.out.println("Article change thumbnail successful");
             }
         }else {
             reqArticle.setThumbnail(oldArticle.getThumbnail());

@@ -4,7 +4,7 @@
        th:href="@{/article/{uuid}(uuid=${uuid})}"
        class="card h-100 shadow-sm text-decoration-none border-0">
         <div class="w-100 overflow-hidden" style="height: 195px;">
-            <img th:src="@{${thumbnail}}" alt="picture" class="bd-placeholder-img card-img-top object-fit-cover">
+            <img th:src="@{${thumbnail}}" alt="picture" class="bd-placeholder-img card-img-top h-100 object-fit-cover">
         </div>
         <div class="card-body position-relative">
             <div class="position-absolute start-0 translate-middle-y">
@@ -53,7 +53,7 @@
     <div class="card shadow-sm border-0 h-100"
          th:fragment="action(uuid, title, thumbnail,author,description,categories)">
         <div class="w-100 overflow-hidden" style="height: 195px;">
-            <img th:src="@{${thumbnail}}" alt="picture" class="bd-placeholder-img card-img-top object-fit-cover">
+            <img th:src="@{${thumbnail}}" alt="picture" class="bd-placeholder-img card-img-top h-100 object-fit-cover">
         </div>
         <div class="card-body position-relative">
             <div class="position-absolute start-0 translate-middle-y">
@@ -129,7 +129,9 @@
 
     <!--    Card Author ~ Start -->
     <div class="card shadow-sm border-0 h-100" th:fragment="author(user)">
-        <img th:src="${user.avatar}" class="card-img-top" th:alt="${user.username}">
+        <div class="w-100 overflow-hidden" style="height: 195px;">
+            <img th:src="${user.avatar}" class="card-img-top object-fit-contain h-100" th:alt="${user.username}">
+        </div>
         <div class="card-body">
             <h5 class="card-title mb-0 text-uppercase" th:text="${user.name}">Card title</h5>
             <b class="text-primary" th:text="${#strings.prepend(user.username,'@')}"></b>

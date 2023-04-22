@@ -18,16 +18,25 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public List<Category> getCategories() {
-        return staticRepository.getCategories();
+        List<Category> categories = staticRepository.getCategories().stream().map(category -> {
+            category.setArticles(this.getArticlesByCategory(category));
+            return category;
+        }).toList();
+        return categories;
     }
 
     @Override
     public CategoryArticles getCategoryById(Integer id) {
         Category category = staticRepository.getCategories().stream().filter(cat -> cat.getId().equals(id))
                             .findFirst().orElse(null);
+        List<Article> articles = getArticlesByCategory(category);
+        return new CategoryArticles(category,articles);
+    }
+
+    private List<Article> getArticlesByCategory(Category category) {
         List<Article> articles = staticRepository.getArticles().stream()
                 .filter(article -> article.getCategories().contains(category))
                 .toList();
-        return new CategoryArticles(category,articles);
+        return articles;
     }
 }

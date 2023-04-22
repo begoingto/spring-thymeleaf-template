@@ -38,8 +38,12 @@
                             <a class="list-group-item"
                                th:each="category : ${categories}"
                                th:href="@{/categories/{id}(id=${category.id})}"
-                               th:text="${category.name}"
-                            >An item</a>
+                            >
+                                <span th:text="${category.name}">
+                                </span>
+                                <small th:text="${category.articles.size()}" class="badge rounded-pill bg-danger">
+                                </small>
+                            </a>
                         </ul>
                     </div>
                 </div>

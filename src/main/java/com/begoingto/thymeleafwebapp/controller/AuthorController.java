@@ -38,6 +38,7 @@ public class AuthorController {
 
     @GetMapping("/new")
     String newAuthor(Author author, Model model){
+        author.setGender("male");
         model.addAttribute("author",author);
         return "authors/author-new";
     }

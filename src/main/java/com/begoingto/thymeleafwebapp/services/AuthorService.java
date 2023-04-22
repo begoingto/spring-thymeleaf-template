@@ -11,5 +11,7 @@ public interface AuthorService {
     Author getAuthorById(Integer id);
 
     int getIndex(Author author);
-    Author updateAuthor(Integer uuid, Author author,MultipartFile profile,MultipartFile cover);
+    Author updateAuthor(Integer id, Author author,MultipartFile profile,MultipartFile cover);
+
+    boolean deleteAuthor(Integer id);
 }

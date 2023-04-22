@@ -70,6 +70,9 @@
                     </div>
                 </div>
                 <div class="btn-group">
+                    <a th:href="@{/authors}" class="btn btn-sm btn-outline-warning border-0"><i class="bi bi-arrow-90deg-left"></i>
+                        Back
+                    </a>
                     <a th:href="@{/authors/edit/{id}(id=${author.id})}" class="btn btn-sm btn-outline-primary border-0"><i class="bi bi-pencil-square"></i>
                         Edit
                     </a>
@@ -78,7 +81,7 @@
                             data-bs-toggle="dropdown" aria-expanded="false"
                     ><i class="bi bi-trash"></i> Delete
                     </button>
-                    <ul class="dropdown-menu py-0">
+                    <form th:action="@{/authors/delete/{id}(id=*{id})}" method="get" class="dropdown-menu py-0">
                         <li class="dropdown-item  c-dropdown">
                             <h6 class="text-center mb-0">Are you sure!</h6>
                             <p class="text-center mb-0">U want to delete it.</p>
@@ -86,11 +89,11 @@
                         <li class="dropdown-item text-secondary d-flex justify-content-between c-dropdown">
                             <button type="button" class="btn btn-warning btn-sm"><small><i class="bi bi-x-circle"></i>
                                 Cancel</small></button>
-                            <a
-                                    th:href="@{/article}"
-                                    class="btn btn-danger btn-sm"><small><i class="bi bi-check2-circle"></i> Yes</small></a>
+                            <button
+                                    type="submit"
+                                    class="btn btn-danger btn-sm"><small><i class="bi bi-check2-circle"></i> Yes</small></button>
                         </li>
-                    </ul>
+                    </form>
                 </div>
             </div>
         </div>

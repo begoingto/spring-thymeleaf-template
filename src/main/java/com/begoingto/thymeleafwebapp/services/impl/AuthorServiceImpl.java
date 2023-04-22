@@ -69,6 +69,7 @@ public class AuthorServiceImpl implements AuthorService {
         }else {
             author.setAvatar(oldAuthor.getAvatar());
         }
+
         if (!cover.isEmpty()){
             FileUpload fileCover = getFileUpload(cover);
             author.setCover("/files/" + fileCover.fileName());
@@ -76,6 +77,7 @@ public class AuthorServiceImpl implements AuthorService {
         }else {
             author.setCover(oldAuthor.getCover());
         }
+
         staticRepository.getArticles().stream().filter(article -> article.getAuthor().getId().equals(author.getId()))
                         .forEach(art -> {
                           art.setAuthor(author);
@@ -83,5 +85,14 @@ public class AuthorServiceImpl implements AuthorService {
         staticRepository.getAuthors().set(index,author);
         System.out.println("Author update successful");
         return author;
+    }
+
+    @Override
+    public boolean deleteAuthor(Integer id) {
+        Author author = this.getAuthorById(id);
+        staticRepository.getAuthors().remove(author);
+        staticRepository.getArticles().stream()
+                .filter(article -> !article.getAuthor().getId().equals(id));
+        return true;
     }
 }

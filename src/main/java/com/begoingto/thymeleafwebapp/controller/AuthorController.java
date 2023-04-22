@@ -67,7 +67,7 @@ public class AuthorController {
         return "authors/edit-profile";
     }
 
-    @PostMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     String updateAuthor(@PathVariable Integer id,
                         @ModelAttribute @Valid Author author,
                         BindingResult result,
@@ -79,6 +79,13 @@ public class AuthorController {
             System.out.println(result.getFieldErrors());
         }
         authorService.updateAuthor(id,author,profile,cover);
+        return "redirect:/authors";
+    }
+
+
+    @GetMapping("/delete/{id}")
+    String deleteAuthor(@PathVariable Integer id){
+        authorService.deleteAuthor(id);
         return "redirect:/authors";
     }
 }

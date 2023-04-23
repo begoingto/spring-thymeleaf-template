@@ -1,6 +1,7 @@
 package com.begoingto.thymeleafwebapp.models;
 
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
@@ -14,8 +15,10 @@ public class Category {
     @NonNull
     private Integer id;
     @NonNull
+    @NotBlank
     private String name;
     @NonNull
+    @NotBlank
     private String color;
     private List<Article> articles;
 }

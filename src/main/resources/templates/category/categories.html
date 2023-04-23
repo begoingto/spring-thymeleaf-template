@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/master}"
+>
+<head>
+    <title>Category Page</title>
+    <th:block layout:fragment="substyles">
+    </th:block>
+</head>
+<body>
+<main class="px-0" layout:fragment="main-content">
+    <div class="container card mt-3">
+        <h2 class="card-header text-center position-relative">
+            <a href="/categories/new" class="btn btn-primary position-absolute top-50 start-0 translate-middle-y">
+                <i class="bi bi-folder-plus"></i> New Category</a>
+            List Category
+        </h2>
+        <div class="card-body">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Color</th>
+                        <th scope="col">Articles</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr
+                            th:each="category : ${categories}"
+                            th:object="${category}"
+                            th:href="@{/categories/{id}(id=*{id})}"
+                    >
+                        <th scope="row" th:text="*{id}">1</th>
+                        <td th:text="*{name}">Mark</td>
+                        <td th:text="*{color}"
+                            th:attrappend="style='color:'+*{color}"
+                        >Otto</td>
+                        <td th:text="*{articles.size()}">@mdo</td>
+                        <td class="dropend">
+                            <a class="icon-link icon-link-hover text-decoration-none" style="--bs-icon-link-transform: translate3d(0, -.125rem, 0);"
+                               th:href="@{/categories/edit/{id}(id=*{id})}"
+                            >
+                                <i class="bi bi-pencil-square"></i>
+                                edit
+                            </a> |
+                            <a class="icon-link icon-link-hover text-danger text-decoration-none" style="--bs-icon-link-transform: translate3d(0, -.125rem, 0);"
+                                href="#"
+                               data-bs-toggle="dropdown" aria-expanded="false"
+                            >
+                                <i class="bi bi-trash2"></i>
+                                delete
+                            </a>
+                            <ul class="dropdown-menu py-0">
+                                <li class="dropdown-item  c-dropdown">
+                                    <h6 class="text-center mb-0">Are you sure!</h6>
+                                    <p class="text-center mb-0">U want to delete it.</p>
+                                </li>
+                                <li class="dropdown-item text-secondary d-flex justify-content-between c-dropdown">
+                                    <button type="button" class="btn btn-warning btn-sm"><small><i class="bi bi-x-circle"></i> Cancel</small></button>
+                                    <a
+                                            th:href="@{/categories/delete/{id}(id=*{id})}"
+                                            class="btn btn-danger btn-sm"><small><i class="bi bi-check2-circle"></i> Yes</small></a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</main>
+</body>
+</html>

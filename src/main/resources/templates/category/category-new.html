@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/master}"
+>
+<head>
+    <title>Category Page</title>
+    <th:block layout:fragment="substyles">
+    </th:block>
+</head>
+<body>
+<main class="px-0" layout:fragment="main-content">
+    <div class="container card mt-3">
+        <h2 class="card-header text-center position-relative">
+            <a href="/categories" class="btn btn-warning btn-sm position-absolute top-50 start-0 translate-middle-y">
+                <i class="bi bi-arrow-90deg-left"></i> Back</a>
+            New Category
+        </h2>
+        <form th:action="@{/categories/new}" method="post" class="card-body" th:object="${category}">
+            <div class="mb-3 row">
+                <label for="name" class="col-sm-2 col-form-label">Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="name" th:field="*{name}">
+                    <div  class="form-text text-danger" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">We'll never share your .</div>
+                </div>
+            </div>
+            <div class="mb-3 row">
+                <label for="color" class="col-sm-2 col-form-label">Color</label>
+                <div class="col-sm-10">
+                    <input type="color" class="form-control" id="color" th:field="*{color}">
+                    <div  class="form-text text-danger" th:if="${#fields.hasErrors('color')}" th:errors="*{color}">We'll never share your .</div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-success"><i class="bi bi-check-lg"></i> Submit</button>
+        </form>
+    </div>
+</main>
+</body>
+</html>

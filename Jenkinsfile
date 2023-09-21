@@ -4,6 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh(script: 'ls -al')
+                sh(script: 'java --version')
                 echo 'Building..'
             }
         }

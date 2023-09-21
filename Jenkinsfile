@@ -27,6 +27,12 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying....'
+                sh(script: 'ssh -i /var/jenkins_home/.ssh/id_rsa root@167.172.72.97')
+                sh(script: 'git clone git@github.com:begoingto/spring-thymeleaf-template.git')
+                sh(script: 'cd spring-thymeleaf-template')
+                sh(script: 'git pull')
+                sh(script: 'docker-compose up -d')
+                sh(script: 'exit 0')
             }
         }
     }

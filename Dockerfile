@@ -8,3 +8,4 @@ RUN ["ls", "-la", "/app"]
 EXPOSE 8080
 #ENTRYPOINT ["java","-jar", "-Dspring.profiles.active=dev","/app/build/libs/*-SNAPSHOT.jar"]
 ENTRYPOINT java -jar -Dspring.profiles.active=dev /app/build/libs/*-SNAPSHOT.jar
+#ENTRYPOINT /app/gradlew bootRun

@@ -8,11 +8,13 @@ pipeline {
                 echo 'Building..'
                 sh(script: 'chmod +x gradlew')
                 sh(script: './gradlew clean build')
+                sh(script: 'ls -al')
             }
         }
         stage('Test') {
             steps {
                 echo 'Testing..'
+                sh(script: './gradlew test')
             }
         }
         stage('Deploy') {

@@ -8,6 +8,12 @@ class ThymeleafWebappApplicationTests {
 
     @Test
     void contextLoads() {
+        System.out.println("Testing context loads");
+    }
+
+    @Test
+    void test1() {
+        System.out.println("Testing test1");
     }
 
 }

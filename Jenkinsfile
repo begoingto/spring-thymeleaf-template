@@ -3,6 +3,7 @@ pipeline {
     stages {
         stage('Build') {
             steps {
+                sh(script: 'ls -al')
                 echo 'Building..'
             }
         }

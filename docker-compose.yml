@@ -3,7 +3,7 @@ services:
   web:
     build:
         context: .
-        dockerfile: Dockerfile
+        dockerfile: Dockerfile.txt
     ports:
       - "8080:8080"
     volumes:

@@ -17,7 +17,7 @@
 FROM gradle:8.7-jdk17 AS builder
 WORKDIR /app
 
-COPY build.gradle settings.gradle gradle.properties ./
+COPY build.gradle settings.gradle ./
 COPY gradle ./gradle
 RUN gradle dependencies --no-daemon || true
 COPY src ./src

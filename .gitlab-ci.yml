@@ -2,19 +2,16 @@ stages:
   - build
 
 build:
-  image: docker:29.4.1-cli
   services:
-    - name: docker:29.4.1-dind
-      command:
-        - "--tls=false"
+    - docker:29.4.1-dind
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_DRIVER: overlay2
-    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_TLS_CERTDIR: ""
   stage: build
-  before_script:
-    - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u
-      "$CI_REGISTRY_USER" --password-stdin
+  # before_script:
+  #   - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u
+  #     "$CI_REGISTRY_USER" --password-stdin
   script:
     - docker info
     # - docker build -t "$CI_REGISTRY_IMAGE" .

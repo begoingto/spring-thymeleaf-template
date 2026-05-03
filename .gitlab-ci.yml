@@ -10,9 +10,7 @@ build:
     DOCKER_TLS_CERTDIR: ""
   stage: build
   before_script:
-    - mkdir -p "/etc/docker/certs.d/$CI_SERVER_HOST:5050"
-    - cp "$CI_SERVER_TLS_CA_FILE"
-      "/etc/docker/certs.d/$CI_SERVER_HOST:5050/ca.crt"
+    - cp "$CI_SERVER_TLS_CA_FILE" "/etc/docker/certs.d/ca.crt"
     - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u
       "$CI_REGISTRY_USER" --password-stdin
   script:

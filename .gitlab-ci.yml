@@ -4,7 +4,7 @@ stages:
 test-job:
   services:
     - name: docker:29.4.1-dind
-      command: [ "--tls=false", "--host=tcp://127.0.0.1:2375" ]
+      command: [ "--tls=false" ]
   variables:
     DOCKER_TLS_CERTDIR: ""
     DOCKER_HOST: "tcp://127.0.0.1:2375"

@@ -13,6 +13,5 @@ build:
   #   - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u
   #     "$CI_REGISTRY_USER" --password-stdin
   script:
-    - docker info
-    # - docker build -t "$CI_REGISTRY_IMAGE" .
+    - docker build -t "$CI_REGISTRY_IMAGE" .
     # - docker push "$CI_REGISTRY_IMAGE"

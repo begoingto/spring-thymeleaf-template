@@ -2,6 +2,7 @@ stages:
   - build
 
 build:
+  image: docker:29.4.1-cli
   services:
     - name: docker:29.4.1-dind
       command:

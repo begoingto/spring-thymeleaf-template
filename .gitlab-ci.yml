@@ -5,7 +5,6 @@ build:
   image: docker:29.4.1-cli
   services:
     - name: docker:29.4.1-dind
-      command: [ "--tls=false", "--insecure-registry=192.168.56.5:5050" ]
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_DRIVER: overlay2

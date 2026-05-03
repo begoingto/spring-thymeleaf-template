@@ -9,9 +9,13 @@ build:
     DOCKER_DRIVER: overlay2
     DOCKER_TLS_CERTDIR: ""
   stage: build
-  # before_script:
-  #   - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u
-  #     "$CI_REGISTRY_USER" --password-stdin
+  before_script:
+    - apk update && apk add --no-cache curl
+    - curl -v --cacert "${CI_SERVER_TLS_CA_FILE}" $CI_PIPELINE_URL
   script:
-    - docker build -t "$CI_REGISTRY_IMAGE" .
+    - docker info
+    # - docker build -t "$CI_REGISTRY_IMAGE" .
+    # - export DOCKER_TLS_CERTDIR="/certs"
+    # - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u
+    #   "$CI_REGISTRY_USER" --password-stdin
     # - docker push "$CI_REGISTRY_IMAGE"

@@ -2,12 +2,10 @@ stages:
   - test
 
 test-job:
-  image: docker:29.4.1
   services:
     - name: docker:29.4.1-dind
-      alias: docker
   variables:
-    DOCKER_HOST: "tcp://docker:2376"
+    DOCKER_HOST: "unix:///var/run/docker.sock"
     DOCKER_TLS_CERTDIR: ""
   stage: test
   script:

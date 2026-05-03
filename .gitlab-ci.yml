@@ -2,7 +2,6 @@ stages:
   - build
 
 build:
-  image: docker:29.4.1-cli
   services:
     - name: docker:29.4.1-dind
   variables:
@@ -11,7 +10,6 @@ build:
     DOCKER_TLS_CERTDIR: ""
   stage: build
   before_script:
-    - ls -l /etc
     - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u
       "$CI_REGISTRY_USER" --password-stdin
   script:

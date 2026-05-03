@@ -3,11 +3,15 @@ stages:
 
 build:
   services:
-    - docker:29.4.1-dind
+    - name: docker:29.4.1-dind
+      command:
+        - "--tls=false"
+      volumes:
+        - /certs:/etc/docker/certs.d
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_DRIVER: overlay2
-    DOCKER_TLS_CERTDIR: "/certs"
+    DOCKER_TLS_CERTDIR: ""
   stage: build
   before_script:
     - echo "$CI_REGISTRY_PASSWORD" | docker login $CI_REGISTRY -u

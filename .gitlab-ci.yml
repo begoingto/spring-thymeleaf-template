@@ -4,9 +4,10 @@ stages:
 test-job:
   services:
     - name: docker:29.4.1-dind
+      command: [ "--tls=false", "--host=tcp://127.0.0.1:2375" ]
   variables:
-    DOCKER_HOST: "unix:///var/run/docker.sock"
     DOCKER_TLS_CERTDIR: ""
+    DOCKER_HOST: "tcp://127.0.0.1:2375"
   stage: test
   script:
     - echo "Running tests..."

@@ -27,4 +27,8 @@ FROM eclipse-temurin:17-jre
 WORKDIR /app
 COPY --from=builder /app/build/libs/*.jar spring-app.jar
 EXPOSE 8080
+
+# Healthcheck using actuator readiness endpoint
+HEALTHCHECK CMD ["sh", "-c", "nc -z localhost 8080"]
+
 ENTRYPOINT ["java","-jar","-Dspring.profiles.active=prod","spring-app.jar"]

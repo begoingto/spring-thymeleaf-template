@@ -4,17 +4,14 @@ stages:
 test-job:
   image: docker:24.0.5-cli
   services:
-    - name: docker:24.0.5-dind
-      variables:
-        HEALTHCHECK_TCP_PORT: "2376"
+    - docker:24.0.5-dind
   before_script:
     - docker info
   variables:
-    DOCKER_HOST: tcp://docker:2376
-    DOCKER_TLS_CERTDIR: "/certs"
-    DOCKER_TLS_VERIFY: 1
-    DOCKER_CERT_PATH: "$DOCKER_TLS_CERTDIR/client"
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
   stage: test
   script:
     - echo "Running tests..."
-    - docker images
+    - docker info

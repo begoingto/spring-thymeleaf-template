@@ -34,8 +34,10 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     private Article getArticle(String uuid) {
+        System.out.println("Articles size: " + staticRepository.getArticles().size());
+        System.out.println("Article UUID: " + uuid);
         return staticRepository.getArticles().stream()
-                .filter(a -> a.getUuid().toString().equals(uuid))
+                .filter(a -> a.getUuid().toString().equalsIgnoreCase(uuid))
                 .findFirst()
                 .orElse(null);
     }

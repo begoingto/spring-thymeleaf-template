@@ -1,8 +1,7 @@
 services:
-  web:
-    build:
-      context: .
-      dockerfile: Dockerfile
+  spring:
+    image: 192.168.56.5:5050/demo/spring-thymeleaf-template:latest
+    container_name: spring
     ports:
       - "8080:8080"
     healthcheck:

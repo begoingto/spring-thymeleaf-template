@@ -2,11 +2,9 @@ stages:
   - test
 
 test-job:
-  image: docker:24.0.5-cli
+  image: docker:29.4.1-cli
   services:
-    - docker:24.0.5-dind
-  before_script:
-    - docker info
+    - docker:29.4.1-dind
   variables:
     DOCKER_HOST: tcp://docker:2375
     DOCKER_DRIVER: overlay2
